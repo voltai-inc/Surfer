@@ -1,0 +1,105 @@
+[package]
+name = "libsurfer"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+categories.workspace = true
+rust-version.workspace = true
+build = "build.rs"
+description = "Waveform viewer for VCD, FST, and GHW"
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+base64.workspace = true
+bincode.workspace = true
+bytes.workspace = true
+bytesize.workspace = true
+camino.workspace = true
+chrono = { version = "0.4.31", default-features = false }
+eyre.workspace = true
+config.workspace = true
+derive_more.workspace = true
+ecolor.workspace = true
+eframe.workspace = true
+egui.workspace = true
+egui_extras.workspace = true
+egui_plot = { workspace = true, optional = true }
+egui-remixicon.workspace = true
+emath.workspace = true
+enum-iterator.workspace = true
+epaint.workspace = true
+f128 = { path = "../f128", optional = true }
+fern.workspace = true
+ftr_parser.workspace = true
+futures-core.workspace = true
+futures-util.workspace = true
+fuzzy-matcher.workspace = true
+half.workspace = true
+instruction-decoder.workspace = true
+itertools.workspace = true
+lazy_static.workspace = true
+local-impl.workspace = true
+log.workspace = true
+lz4_flex.workspace = true
+num.workspace = true
+numeric-sort.workspace = true
+pure-rust-locales.workspace = true
+pyo3 = { workspace = true, optional = true }
+rayon.workspace = true
+regex.workspace = true
+reqwest.workspace = true
+rfd.workspace = true
+ron.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_stacker = { version = "0.1", optional = true }
+softposit.workspace = true
+surfer-translation-types = { path = "../surfer-translation-types" }
+surver.workspace = true
+sys-locale.workspace = true
+toml.workspace = true
+web-time.workspace = true
+wellen.workspace = true
+leb128.workspace = true
+tokio-stream = "0.1.17"
+
+[features]
+default = ["performance_plot"]
+accesskit = ["eframe/accesskit", "eframe/web_screen_reader"]
+f128 = ["dep:f128"]
+performance_plot = ["dep:egui_plot"]
+python = ["pyo3", "surfer-translation-types/pyo3"]
+
+[target.'cfg(all(not(windows), not(target_arch = "wasm32")))'.dependencies]
+notify = "8.0"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+directories = "6.0"
+futures = { workspace = true, features = ["executor"] }
+tokio.workspace = true
+extism = { version = "1.11.1", default-features = false }
+extism-manifest = "1.11.1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+futures.workspace = true
+tokio = { workspace = true, features = ["sync"] }
+wasm-bindgen = "0.2.91"
+wasm-bindgen-futures.workspace = true
+web-sys = { version = "= 0.3.77", features = ["Location", "UrlSearchParams"] }
+
+[dev-dependencies]
+egui_skia_renderer = { git = "https://gitlab.com/oscargus/egui_skia_renderer.git", rev = "94d7fe1e97a25df78e570be41f8af2a6c62bcc16" }
+image = { version = "0.25", default-features = false, features = ["png"] }
+image-compare = "0.4.2"
+port_check = "0.2.1"
+project-root = "0.2.2"
+test-log = "0.2.15"
+
+[target.'cfg(not(target_os = "unknown"))'.dev-dependencies]
+tempfile = "3.20.0"
+
+[build-dependencies]
+vergen-gitcl = { version = "1.0", features = ["build"] }

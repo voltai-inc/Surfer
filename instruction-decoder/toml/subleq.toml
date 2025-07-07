@@ -1,0 +1,64 @@
+set = "SUBLEQ"
+width = 16
+
+[formats]
+names = ["subleq"]
+parts = [
+    [
+        "opcode",
+        1,
+        "u8",
+    ],
+    [
+        "r1",
+        5,
+        "Register",
+    ],
+    [
+        "r2",
+        5,
+        "Register",
+    ],
+    [
+        "jump",
+        8,
+        "i8",
+    ],
+]
+
+[types]
+names = ["SUBLEQ"]
+SUBLEQ = [
+    { name = "r1", top = 3, bot = 0 },
+    { name = "r2", top = 3, bot = 0 },
+    { name = "jump", top = 7, bot = 0 },
+]
+
+[subleq]
+type = "SUBLEQ"
+[subleq.repr]
+default = "%r1% %r2% %jump%"
+[subleq.instructions]
+subleq = { mask = 0, match = 0 }
+
+[register]
+names = ["Register"]
+number = 16
+Register = [
+    "TMP0",
+    "PC",
+    "SRC1",
+    "TMP1",
+    "RSLT",
+    "TMP2",
+    "TMP3",
+    "TMP4",
+    "IMM",
+    "TMP5",
+    "ONE",
+    "WORD",
+    "INC",
+    "NEXT",
+    "TWP",
+    "TMP7",
+]

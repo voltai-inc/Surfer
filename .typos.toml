@@ -1,0 +1,4 @@
+default.extend-words = { inout = "inout", inouts = "inouts" }
+
+[files]
+extend-exclude = ["examples"]

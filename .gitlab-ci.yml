@@ -1,0 +1,481 @@
+image: rust:latest
+
+variables:
+    CARGO_HOME: $CI_PROJECT_DIR/cargo
+    FF_ENABLE_BASH_EXIT_CODE_CHECK: "true"
+    GIT_SUBMODULE_STRATEGY: normal
+    EPHEMERAL_BRANCHES_PATH: preview # subpath where previews of pages will be built
+    PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/surfer/${CI_COMMIT_TAG}"
+
+stages:
+    - test
+    - deploy
+    - upload
+    - release
+
+default:
+  cache:
+    key:
+      # New cache if Cargo.lock changes (when adding/updating dependencies)
+      files:
+        - Cargo.lock
+      # One cache per job
+      prefix: "$CI_JOB_NAME"
+    paths:
+      - target
+      - $CARGO_HOME
+
+workflow:
+  rules:
+    - when: always
+  auto_cancel:
+    on_new_commit: interruptible
+
+.build-dependencies:
+  before_script:
+    - apt update -y
+    - apt install -y python3-dev
+  interruptible: true
+
+.snapshots:
+  extends: .build-dependencies
+  artifacts:
+    paths:
+      - snapshots
+    expire_in: 1h
+    when: on_failure
+
+clippy:
+    stage: test
+    extends: .build-dependencies
+    before_script:
+        - rustup component add clippy
+        - cargo install gitlab_clippy
+    script:
+      - cargo -V
+      - cargo clippy --color=always
+    after_script:
+        - cargo clippy --message-format=json | $CARGO_HOME/bin/gitlab-clippy > gl-code-quality-report.json
+    artifacts:
+        reports:
+            codequality: gl-code-quality-report.json
+        expire_in: 1 week
+
+cargo_about:
+    stage: test
+    extends: .build-dependencies
+    before_script:
+        - cargo install --locked cargo-about
+    script:
+        - cargo about generate about.hbs -o /dev/null
+
+build_book:
+    stage: test
+    extends: .build-dependencies
+    before_script:
+        - cargo install --no-default-features --features search --locked mdbook
+    script:
+        - cp snapshots/theme_*.png docs/configuration/themes
+        - /builds/${CI_PROJECT_PATH}/cargo/bin/mdbook build
+
+
+test:
+    stage: test
+    extends: .snapshots
+    script:
+        - rustc -V
+        - cargo -V
+        - cargo test --features python --color=always --locked -- --include-ignored
+
+test-windows:
+    tags:
+        - saas-windows-medium-amd64
+    stage: test
+    script:
+        - Invoke-WebRequest https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe -OutFile .\rustup-init.exe -UseBasicParsing
+        - ICACLS ".\rustup-init.exe" /grant:r "users:(RX)" /C
+        - .\rustup-init.exe -y
+        - $env:Path += ";C:\GitLab-Runner\builds\${CI_PROJECT_NAMESPACE}\surfer\cargo\bin"
+        - rustc -V
+        - cargo -V
+        - cargo test --color=always --locked -- --include-ignored
+    interruptible: true
+
+test-no-default-features:
+    stage: test
+    extends: .snapshots
+    script:
+        - rustc -V
+        - cargo -V
+        - cargo test --color=always --locked --no-default-features -- --include-ignored
+
+test-oldest-supported:
+    # This version should match rust-version in Cargo.toml
+    image: rust:1.82
+    stage: test
+    extends: .snapshots
+    script:
+        - rustc -V
+        - cargo -V
+        - cargo test --features python --color=always --locked -- --include-ignored
+
+test-beta:
+    image: "instrumentisto/rust:beta"
+    stage: test
+    extends: .snapshots
+    script:
+        - rustc -V
+        - cargo -V
+        - cargo test --features python --color=always --locked -- --include-ignored
+    allow_failure: true
+
+test-nightly:
+    image: "rustlang/rust:nightly"
+    stage: test
+    extends: .snapshots
+    script:
+        - apt install -y ninja-build clang
+        - rustc -V
+        - cargo -V
+        - cargo test --features python --color=always --locked -- --include-ignored
+    allow_failure: true
+
+test-macos-aarch64:
+    stage: test
+    extends: .snapshots
+    variables:
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_ENV_HINTS: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+    tags:
+        - saas-macos-medium-m1
+    image: macos-14-xcode-15
+    before_script:
+        - brew install rustup-init
+        - ulimit -n 1000
+        - rustup install 1.82
+        - rustup override set 1.82
+    script:
+        - rustc -V
+        - cargo -V
+        - cargo test -- --include-ignored
+  # macOS runners are not available for "normal" GitLab users, but we are
+  # part of the open source program.
+    rules:
+        - if: '$CI_PROJECT_NAMESPACE == "surfer-project"'
+    allow_failure: true
+
+coverage:
+    rules:
+        - if: $CI_MERGE_REQUEST_EVENT_TYPE != "merge_train"
+          when: always
+        - when: never
+    image: xd009642/tarpaulin
+    stage: test
+    extends: .build-dependencies
+    interruptible: true
+    script:
+        - rustc -V
+        - cargo -V
+        - shopt -s globstar
+        - >
+          cargo tarpaulin --out Xml --root . --manifest-path Cargo.toml --skip-clean --color Always
+          --exclude-files
+          f128/**/*
+          instruction-decoder/**/*
+
+    coverage: '/^\d+.\d+% coverage/'
+    artifacts:
+        reports:
+            coverage_report:
+                coverage_format: cobertura
+                path: cobertura.xml
+        expire_in: 1 week
+    allow_failure: true # Often runs out of disk space
+
+pre-commit:
+    stage: test
+    variables:
+      PRE_COMMIT_HOME: ${CI_PROJECT_DIR}/.cache/pre-commit
+    cache:
+      paths:
+        - ${PRE_COMMIT_HOME}
+    before_script:
+        - apt update -y
+        - apt install python3 python3.11-venv -y
+        - python3 -m venv pc
+        - source ./pc/bin/activate
+        - python3 -m pip install pre-commit
+        - pre-commit install
+        - rustup component add rustfmt
+        - rustup component add clippy
+        - git fetch origin ${CI_DEFAULT_BRANCH}
+    script:
+        - SKIP=cargo-test,cargo-check pre-commit run --from-ref origin/${CI_DEFAULT_BRANCH} --to-ref HEAD
+    interruptible: true
+
+typos-and-todos:
+    stage: test
+    cache: [] # Disable cache since the spell checker finds typos in other peoples source code
+    before_script:
+        - apt update
+        - apt install -y wget
+        - wget https://github.com/crate-ci/typos/releases/download/v1.22.9/typos-v1.22.9-x86_64-unknown-linux-musl.tar.gz -O typos.tar.gz
+        # Extract only the typos executable to not get a docs folder which the typo checker
+        # will find typos in
+        - tar xzf typos.tar.gz ./typos
+    script:
+        - ./typos surfer
+          # invert exit code of grep while still printing all matches
+        - set -e; find surfer -name "*.rs" | xargs grep -Ei "// *TODO" || exit 0 && exit 1
+    after_script:
+        - >
+            if [ $CI_JOB_STATUS == 'success' ]; then
+              echo 'SUCCESS'
+            else
+              echo 'Running again to give you all output since the test failed'
+              ./typos surfer || echo ""
+              set -e; find surfer -name "*.rs" | xargs grep -Ei "// *TODO" || echo ""
+            fi
+    interruptible: true
+
+linux_build:
+    stage: deploy
+    needs: [test]
+    script:
+        - apt-get update -y
+        - apt-get install -y openssl libssl-dev zip
+        - git fetch --tags
+        - rustc -V
+        - cargo -V
+        - cargo build --release --locked --features accesskit --timings --color always
+        - mkdir dist
+        - cp target/release/surfer dist/surfer
+        - cp target/release/surver dist/surver
+        - cd dist
+        - zip ../surfer_linux.zip surfer surver
+    artifacts:
+        paths:
+            - surfer_linux.zip
+            - target/cargo-timings/*.html
+        expire_in: 1 week
+    interruptible: true
+
+rocky_build:
+    image: rockylinux:8
+    needs: [test]
+    stage: deploy
+    script:
+        - curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        - . "/builds/surfer-project/surfer/cargo/env"
+        - dnf install -y openssl openssl-devel
+        - dnf groupinstall -y 'Development Tools'
+        - git submodule update --init
+        - mkdir dist
+        - git fetch --tags
+        - rustc -V
+        - cargo -V
+        - cargo build --release --locked --features accesskit --timings --color always
+        - cp target/release/surfer dist/surfer
+        - cp target/release/surver dist/surver
+        - cd dist
+        - zip ../surfer_linux_rocky.zip surfer surver
+    artifacts:
+        paths:
+            - surfer_linux_rocky.zip
+            - target/cargo-timings/*.html
+        expire_in: 1 week
+    # Do not run this in user repos as it tends to give errors
+    rules:
+        - if: '$CI_PROJECT_NAMESPACE == "surfer-project"'
+    interruptible: true
+
+windows_build:
+    stage: deploy
+    needs: [test-windows]
+    script:
+        - apt-get update -y
+        - apt-get install -y mingw-w64 zip
+        - git fetch --tags
+        - rustc -V
+        - cargo -V
+        - rustup target add x86_64-pc-windows-gnu
+        - cargo build --target x86_64-pc-windows-gnu --release --locked --features accesskit --color always --timings
+        - mkdir dist
+        - cp target/x86_64-pc-windows-gnu/release/surfer.exe dist/surfer.exe
+        - cp target/x86_64-pc-windows-gnu/release/surver.exe dist/surver.exe
+        - cd dist
+        - zip ../surfer_win.zip surfer.exe surver.exe
+    artifacts:
+        paths:
+            - surfer_win.zip
+            - target/cargo-timings/*.html
+        expire_in: 1 week
+    interruptible: true
+
+macos-aarch64_build:
+    stage: deploy
+    needs: [test-macos-aarch64]
+    variables:
+        HOMEBREW_NO_AUTO_UPDATE: 1
+        HOMEBREW_NO_ENV_HINTS: 1
+        HOMEBREW_NO_INSTALL_CLEANUP: 1
+    tags:
+        - saas-macos-medium-m1
+    image: macos-14-xcode-15
+    before_script:
+        - brew install rustup-init
+        - rustup install 1.82
+        - rustup override set 1.82
+        - cargo -V
+        - rustc -V
+        - git fetch --tags
+    script:
+        - cargo build --release --locked --features accesskit --color always --timings
+        - ls -alrt target/release/surfer
+        - mkdir dist
+        - cp target/release/surfer dist/surfer
+        - cp target/release/surver dist/surver
+        - cd dist
+        - zip ../surfer_macos-aarch64.zip surfer surver
+    artifacts:
+        paths:
+            - surfer_macos-aarch64.zip
+            - target/cargo-timings/*.html
+        expire_in: 1 week
+  # macOS runners are not available for "normal" GitLab users, but we are
+  # part of the open source program.
+    rules:
+        - if: '$CI_PROJECT_NAMESPACE == "surfer-project"'
+    interruptible: true
+
+trigger-docs:
+    stage: deploy
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+          when: always
+        - when: never
+    trigger: surfer-project/docs.surfer-project.org
+
+pages_build:
+    stage: test
+    extends: .build-dependencies
+    script:
+        - git fetch --tags
+        - rustup target add wasm32-unknown-unknown
+        - rustc -V
+        - cargo -V
+        - wget -qO- https://github.com/trunk-rs/trunk/releases/download/v0.20.2/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+        - ls ./trunk
+        - chmod +x trunk
+          # https://github.com/thedodd/trunk/pull/361#issuecomment-1308487648 trunk can not
+          # generate relative urls which we want for external pipelines to be able
+          # to download our artefacts and put them wherever on their webserver. To fix this,
+          # we'll build with a dummy public URL, then replace it with ./
+        - RUSTFLAGS="--cfg=web_sys_unstable_apis" ./trunk build surfer/index.html --release --public-url /dist --features accesskit
+        - cp -r surfer/dist pages_build
+        - cp -r surfer/dist surfer_wasm
+        - cp examples/*.vcd pages_build/
+        - sed -i "s|/dist/|./|g" pages_build/index.html
+    artifacts:
+        paths:
+            - pages_build
+            - surfer_wasm
+        expire_in: 1h
+    interruptible: true
+
+
+# https://k33g.gitlab.io/articles/2020-07-23-GITLAB-PAGES-EN.html
+# Deploy gitlab pages
+# The name of this job *must* be pages:, otherwise no deploymet happens D:
+pages:
+    stage: deploy
+    dependencies: [pages_build]
+    needs: [pages_build]
+    script:
+        - mkdir -p public
+        - cp pages_build/* public
+    rules:
+        - if: $CI_COMMIT_BRANCH == "main"
+          when: always
+        - when: never
+    artifacts:
+        paths:
+            - public
+        expire_in: 1h
+
+
+pages_preview:
+    stage: deploy
+    dependencies: [pages_build]
+    needs: [pages_build]
+    script:
+        - mkdir -p public
+        - cp pages_build/* public
+    artifacts:
+        paths:
+            - public
+    rules:
+        - if: $CI_MERGE_REQUEST_IID
+    environment:
+        name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_SLUG}
+        url: https://${CI_PROJECT_NAMESPACE}.gitlab.io/-/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public/index.html
+        on_stop: pages_preview_stop
+
+
+pages_preview_stop:
+  stage: deploy
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+      when: manual
+  allow_failure: true
+  environment:
+    name: preview/${CI_PROJECT_NAME}/${CI_COMMIT_REF_SLUG}
+    action: stop
+  script:
+    - echo "👋 bye"
+
+
+# A small job that just distributes the files required for hosting surfer
+# in a single zip file without any files
+wasm_artifacts:
+    stage: deploy
+    dependencies: [pages_build]
+    needs: [pages_build]
+    script:
+        - echo "No script for wasm_artifacts"
+    artifacts:
+        paths:
+            - surfer_wasm
+        expire_in: 1h
+
+upload:
+  dependencies: [windows_build, linux_build, macos-aarch64_build]
+  needs: [windows_build, linux_build, macos-aarch64_build]
+  stage: upload
+  image: curlimages/curl:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file surfer_win.zip "${PACKAGE_REGISTRY_URL}/surfer_win_${CI_COMMIT_TAG}.zip"
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file surfer_linux.zip "${PACKAGE_REGISTRY_URL}/surfer_linux_${CI_COMMIT_TAG}.zip"
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file surfer_macos-aarch64.zip "${PACKAGE_REGISTRY_URL}/surfer_macos-aarch64_${CI_COMMIT_TAG}.zip"
+
+release:
+  # Caution, as of 2021-02-02 these assets links require a login, see:
+  # https://gitlab.com/gitlab-org/gitlab/-/issues/299384
+  dependencies: [upload]
+  needs: [upload]
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - |
+      release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
+        --assets-link "{\"name\":\"surfer_win_${CI_COMMIT_TAG}.zip\",\"url\":\"${PACKAGE_REGISTRY_URL}/surfer_win_${CI_COMMIT_TAG}.zip\"}" \
+        --assets-link "{\"name\":\"surfer_linux_${CI_COMMIT_TAG}.zip\",\"url\":\"${PACKAGE_REGISTRY_URL}/surfer_linux_${CI_COMMIT_TAG}.zip\"}" \
+        --assets-link "{\"name\":\"surfer_macos-aarch64_${CI_COMMIT_TAG}.zip\",\"url\":\"${PACKAGE_REGISTRY_URL}/surfer_macos-aarch64_${CI_COMMIT_TAG}.zip\"}"

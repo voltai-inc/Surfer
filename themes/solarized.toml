@@ -1,0 +1,30 @@
+# Surfer solarized
+
+foreground = "839496"
+border_color = "282b2d"
+selected_elements_colors = { background = "2c3b3d", alt_background = "3c3b3d", foreground = "839496" }
+canvas_colors = { background = "002b36", foreground = "839496" }
+primary_ui_color = { background = "274d5a", foreground = "839496" }
+secondary_ui_color = { background = "073642", foreground = "839496" }
+accent_info = { background = "2aa198", foreground = "073642" }
+accent_warn = { background = "b58900", foreground = "1e1e1e" }
+accent_error = { background = "dc322f", foreground = "839496" }
+variable_default = "1f6102"
+variable_undefined = "46000c"
+# Convention dictates this being yellow, but yellow is super hard
+# to make visible on a white background, so we'll make it blue
+variable_highimp = "000347"
+cursor = { color="b63935", width=2 }
+linewidth = 2
+highlight_background = "0F3B37"
+
+[colors]
+Green = "859900"
+Red = "dc322f"
+Yellow = "b58900"
+Blue = "268bd2"
+Magenta = "d33682"
+Cyan = "2aa198"
+Orange = "cb4b16"
+Violet = "6c71c4"
+Gray = "fdf6e3"

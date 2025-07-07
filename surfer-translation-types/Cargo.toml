@@ -1,0 +1,16 @@
+[package]
+name = "surfer-translation-types"
+version.workspace = true
+license.workspace = true
+edition.workspace = true
+repository.workspace = true
+categories.workspace = true
+
+[dependencies]
+eyre.workspace = true
+derive_more.workspace = true
+ecolor.workspace = true
+extism-convert = "1.11.1"
+num.workspace = true
+pyo3 = { workspace = true, optional = true }
+serde.workspace = true

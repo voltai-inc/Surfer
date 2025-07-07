@@ -1,0 +1,19 @@
+[package]
+name = "f128_internal"
+version = "0.2.2"
+authors = ["Joshua Karns <jkarns275@gmail.com>"]
+# build = "build.rs"
+license = "MIT"
+description = "Internal bindings to the gcc quadmath library"
+repository = "https://github.com/jkarns275/f128"
+
+[features]
+bytemuck = ["dep:bytemuck"]
+
+[dependencies]
+bytemuck = { version = "1.14.0", optional = true }
+num-traits = "0.2.6"
+libc = "0.2"
+
+[build-dependencies]
+cc = "1.0"

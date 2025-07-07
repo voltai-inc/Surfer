@@ -1,0 +1,3017 @@
+set = "RVV" # auto-generated, based on riscv-opcodes 5181d13bef845edfb511e3132a7e661090e3204b
+width = 32
+
+[formats]
+names = [
+    "format_1-0",
+    "format_2-0",
+    "format_2-1",
+    "format_3-0",
+    "format_4-0",
+    "format_5-0",
+    "format_5-1",
+    "format_6-0",
+    "format_7-0",
+    "format_8-0",
+    "format_9-0",
+    "format_9-1",
+    "format_10-0",
+    "format_10-1",
+    "format_11-0",
+    "format_12-0",
+    "format_13-0",
+    "format_14-0",
+    "format_15-0",
+    "format_16-0",
+    "format_17-0",
+    "format_18-0",
+    "format_19-0",
+    "format_20-0",
+    "format_21-0",
+    "format_22-0",
+    "format_23-0",
+    "format_24-0",
+]
+parts = [
+    [
+        "vm",
+        1,
+        "Mapping_vm",
+    ],
+    [
+        "vs2",
+        5,
+        "Register_vec",
+    ],
+    [
+        "vs1",
+        5,
+        "Register_vec",
+    ],
+    [
+        "vd",
+        5,
+        "Register_vec",
+    ],
+    [
+        "rs1_Register_int",
+        5,
+        "Register_int",
+    ],
+    [
+        "rs1_Register_float",
+        5,
+        "Register_float",
+    ],
+    [
+        "rd_Register_int",
+        5,
+        "Register_int",
+    ],
+    [
+        "rd_Register_float",
+        5,
+        "Register_float",
+    ],
+    [
+        "nf",
+        3,
+        "Mapping_seg",
+    ],
+    [
+        "rs2_Register_int",
+        5,
+        "Register_int",
+    ],
+    [
+        "rs2_Register_float",
+        5,
+        "Register_float",
+    ],
+    [
+        "vs3",
+        5,
+        "Register_vec",
+    ],
+    [
+        "zimm10",
+        10,
+        "Mapping_vtypei",
+    ],
+    [
+        "zimm11",
+        11,
+        "Mapping_vtypei",
+    ],
+    [
+        "none",
+        32,
+        "u32",
+    ],
+    [
+        "imm",
+        32,
+        "VInt",
+    ],
+    [
+        "himm",
+        32,
+        "VInt",
+        "hex",
+    ],
+]
+
+[types]
+names = [
+    "type_1-0",
+    "type_2-0",
+    "type_2-1",
+    "type_3-0",
+    "type_4-0",
+    "type_5-0",
+    "type_5-1",
+    "type_6-0",
+    "type_7-0",
+    "type_8-0",
+    "type_9-0",
+    "type_9-1",
+    "type_10-0",
+    "type_10-1",
+    "type_11-0",
+    "type_12-0",
+    "type_13-0",
+    "type_14-0",
+    "type_15-0",
+    "type_16-0",
+    "type_17-0",
+    "type_18-0",
+    "type_19-0",
+    "type_20-0",
+    "type_21-0",
+    "type_22-0",
+    "type_23-0",
+    "type_24-0",
+]
+[[types.type_1-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_1-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_1-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_1-0]]
+name = "vs1"
+top = 4
+bot = 0
+
+[[types.type_1-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_1-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_1-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_2-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_2-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_2-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_2-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_2-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_2-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_2-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_2-1]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_2-1]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_2-1]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_2-1]]
+name = "rs1_Register_float"
+top = 4
+bot = 0
+
+[[types.type_2-1]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_2-1]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_2-1]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_3-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_3-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_3-0]]
+name = "himm"
+top = 4
+bot = 0
+
+[[types.type_3-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_3-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_3-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_4-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_4-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_4-0]]
+name = "vs1"
+top = 4
+bot = 0
+
+[[types.type_4-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_4-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_4-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_5-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_5-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_5-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_5-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_5-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_5-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_5-1]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_5-1]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_5-1]]
+name = "rs1_Register_float"
+top = 4
+bot = 0
+
+[[types.type_5-1]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_5-1]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_5-1]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_6-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_6-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_6-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_6-0]]
+name = "himm"
+top = 4
+bot = 0
+
+[[types.type_6-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_6-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_6-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_7-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_7-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_7-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_7-0]]
+name = "none"
+top = 19
+bot = 12
+
+[[types.type_7-0]]
+name = "rd_Register_int"
+top = 4
+bot = 0
+
+[[types.type_7-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_8-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_8-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_8-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_8-0]]
+name = "none"
+top = 19
+bot = 12
+
+[[types.type_8-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_8-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_9-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_9-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_9-0]]
+name = "none"
+top = 19
+bot = 12
+
+[[types.type_9-0]]
+name = "rd_Register_int"
+top = 4
+bot = 0
+
+[[types.type_9-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_9-1]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_9-1]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_9-1]]
+name = "none"
+top = 19
+bot = 12
+
+[[types.type_9-1]]
+name = "rd_Register_float"
+top = 4
+bot = 0
+
+[[types.type_9-1]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_10-0]]
+name = "none"
+top = 31
+bot = 20
+
+[[types.type_10-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_10-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_10-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_10-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_10-1]]
+name = "none"
+top = 31
+bot = 20
+
+[[types.type_10-1]]
+name = "rs1_Register_float"
+top = 4
+bot = 0
+
+[[types.type_10-1]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_10-1]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_10-1]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_11-0]]
+name = "none"
+top = 31
+bot = 26
+
+[[types.type_11-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_11-0]]
+name = "none"
+top = 24
+bot = 12
+
+[[types.type_11-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_11-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_12-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_12-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_12-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_12-0]]
+name = "none"
+top = 24
+bot = 20
+
+[[types.type_12-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_12-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_12-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_12-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_13-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_13-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_13-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_13-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_13-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_13-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_13-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_13-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_14-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_14-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_14-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_14-0]]
+name = "rs2_Register_int"
+top = 4
+bot = 0
+
+[[types.type_14-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_14-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_14-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_14-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_15-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_15-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_15-0]]
+name = "none"
+top = 19
+bot = 12
+
+[[types.type_15-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_15-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_16-0]]
+name = "none"
+top = 31
+bot = 20
+
+[[types.type_16-0]]
+name = "himm"
+top = 4
+bot = 0
+
+[[types.type_16-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_16-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_16-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_17-0]]
+name = "none"
+top = 31
+bot = 20
+
+[[types.type_17-0]]
+name = "vs1"
+top = 4
+bot = 0
+
+[[types.type_17-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_17-0]]
+name = "vd"
+top = 4
+bot = 0
+
+[[types.type_17-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_18-0]]
+name = "none"
+top = 31
+bot = 20
+
+[[types.type_18-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_18-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_18-0]]
+name = "vs3"
+top = 4
+bot = 0
+
+[[types.type_18-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_19-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_19-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_19-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_19-0]]
+name = "none"
+top = 24
+bot = 20
+
+[[types.type_19-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_19-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_19-0]]
+name = "vs3"
+top = 4
+bot = 0
+
+[[types.type_19-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_20-0]]
+name = "none"
+top = 31
+bot = 30
+
+[[types.type_20-0]]
+name = "zimm10"
+top = 9
+bot = 0
+
+[[types.type_20-0]]
+name = "himm"
+top = 4
+bot = 0
+
+[[types.type_20-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_20-0]]
+name = "rd_Register_int"
+top = 4
+bot = 0
+
+[[types.type_20-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_21-0]]
+name = "none"
+top = 31
+bot = 25
+
+[[types.type_21-0]]
+name = "rs2_Register_int"
+top = 4
+bot = 0
+
+[[types.type_21-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_21-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_21-0]]
+name = "rd_Register_int"
+top = 4
+bot = 0
+
+[[types.type_21-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_22-0]]
+name = "none"
+top = 31
+bot = 31
+
+[[types.type_22-0]]
+name = "zimm11"
+top = 10
+bot = 0
+
+[[types.type_22-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_22-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_22-0]]
+name = "rd_Register_int"
+top = 4
+bot = 0
+
+[[types.type_22-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_23-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_23-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_23-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_23-0]]
+name = "vs2"
+top = 4
+bot = 0
+
+[[types.type_23-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_23-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_23-0]]
+name = "vs3"
+top = 4
+bot = 0
+
+[[types.type_23-0]]
+name = "none"
+top = 6
+bot = 0
+
+[[types.type_24-0]]
+name = "nf"
+top = 2
+bot = 0
+
+[[types.type_24-0]]
+name = "none"
+top = 28
+bot = 26
+
+[[types.type_24-0]]
+name = "vm"
+top = 0
+bot = 0
+
+[[types.type_24-0]]
+name = "rs2_Register_int"
+top = 4
+bot = 0
+
+[[types.type_24-0]]
+name = "rs1_Register_int"
+top = 4
+bot = 0
+
+[[types.type_24-0]]
+name = "none"
+top = 14
+bot = 12
+
+[[types.type_24-0]]
+name = "vs3"
+top = 4
+bot = 0
+
+[[types.type_24-0]]
+name = "none"
+top = 6
+bot = 0
+
+[format_1-0]
+type = "type_1-0"
+
+[format_2-0]
+type = "type_2-0"
+
+[format_2-1]
+type = "type_2-1"
+
+[format_3-0]
+type = "type_3-0"
+
+[format_4-0]
+type = "type_4-0"
+
+[format_5-0]
+type = "type_5-0"
+
+[format_5-1]
+type = "type_5-1"
+
+[format_6-0]
+type = "type_6-0"
+
+[format_7-0]
+type = "type_7-0"
+
+[format_8-0]
+type = "type_8-0"
+
+[format_9-0]
+type = "type_9-0"
+
+[format_9-1]
+type = "type_9-1"
+
+[format_10-0]
+type = "type_10-0"
+
+[format_10-1]
+type = "type_10-1"
+
+[format_11-0]
+type = "type_11-0"
+
+[format_12-0]
+type = "type_12-0"
+
+[format_13-0]
+type = "type_13-0"
+
+[format_14-0]
+type = "type_14-0"
+
+[format_15-0]
+type = "type_15-0"
+
+[format_16-0]
+type = "type_16-0"
+
+[format_17-0]
+type = "type_17-0"
+
+[format_18-0]
+type = "type_18-0"
+
+[format_19-0]
+type = "type_19-0"
+
+[format_20-0]
+type = "type_20-0"
+
+[format_21-0]
+type = "type_21-0"
+
+[format_22-0]
+type = "type_22-0"
+
+[format_23-0]
+type = "type_23-0"
+
+[format_24-0]
+type = "type_24-0"
+
+[mappings]
+names = [
+    "Register_int",
+    "Register_float",
+    "Register_vec",
+    "Mapping_vm",
+    "Mapping_vtypei",
+    "Mapping_seg",
+]
+number = 32
+Register_int = [
+    "zero",
+    "ra",
+    "sp",
+    "gp",
+    "tp",
+    "t0",
+    "t1",
+    "t2",
+    "s0",
+    "s1",
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5",
+    "a6",
+    "a7",
+    "s2",
+    "s3",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "s8",
+    "s9",
+    "s10",
+    "s11",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+]
+Register_float = [
+    "ft0",
+    "ft1",
+    "ft2",
+    "ft3",
+    "ft4",
+    "ft5",
+    "ft6",
+    "ft7",
+    "fs0",
+    "fs1",
+    "fa0",
+    "fa1",
+    "fa2",
+    "fa3",
+    "fa4",
+    "fa5",
+    "fa6",
+    "fa7",
+    "fs2",
+    "fs3",
+    "fs4",
+    "fs5",
+    "fs6",
+    "fs7",
+    "fs8",
+    "fs9",
+    "fs10",
+    "fs11",
+    "ft8",
+    "ft9",
+    "ft10",
+    "ft11",
+]
+Register_vec = [
+    "v0",
+    "v1",
+    "v2",
+    "v3",
+    "v4",
+    "v5",
+    "v6",
+    "v7",
+    "v8",
+    "v9",
+    "v10",
+    "v11",
+    "v12",
+    "v13",
+    "v14",
+    "v15",
+    "v16",
+    "v17",
+    "v18",
+    "v19",
+    "v20",
+    "v21",
+    "v22",
+    "v23",
+    "v24",
+    "v25",
+    "v26",
+    "v27",
+    "v28",
+    "v29",
+    "v30",
+    "v31",
+]
+Mapping_vm = [", v0.t", ""]
+Mapping_seg = ["", "seg2", "seg3", "seg4", "seg5", "seg6", "seg7", "seg8"]
+
+[format_1-0.repr]
+default = "$name$ %vd%, %vs2%, %vs1%%vm%"
+"vfmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfmadd.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfmsac.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfmsub.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfnmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfnmadd.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfnmsac.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfnmsub.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfwmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfwmsac.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfwnmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vfwnmsac.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vmadd.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vnmsac.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vnmsub.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vwmacc.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vwmaccsu.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+"vwmaccu.vv" = "$name$ %vd%, %vs1%, %vs2%%vm%"
+
+[format_2-0.repr]
+default = "$name$ %vd%, %vs2%, %rs1_Register_int%%vm%"
+"vmacc.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vmadd.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vnmsac.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vnmsub.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vwmacc.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vwmaccsu.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vwmaccu.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+"vwmaccus.vx" = "$name$ %vd%, %rs1_Register_int%, %vs2%%vm%"
+
+[format_2-1.repr]
+default = "$name$ %vd%, %vs2%, %rs1_Register_float%%vm%"
+"vfmacc.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfmadd.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfmsac.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfmsub.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfnmacc.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfnmadd.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfnmsac.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfnmsub.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfwmacc.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfwmsac.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfwnmacc.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+"vfwnmsac.vf" = "$name$ %vd%, %rs1_Register_float%, %vs2%%vm%"
+
+[format_3-0.repr]
+default = "$name$ %vd%, %vs2%, %himm%, v0"
+"vmadc.vi" = "$name$ %vd%, %vs2%, %himm%"
+
+[format_4-0.repr]
+default = "$name$ %vd%, %vs2%, %vs1%"
+"vadc.vvm" = "$name$ %vd%, %vs2%, %vs1%, v0"
+"vmadc.vvm" = "$name$ %vd%, %vs2%, %vs1%, v0"
+"vmerge.vvm" = "$name$ %vd%, %vs2%, %vs1%, v0"
+"vmsbc.vvm" = "$name$ %vd%, %vs2%, %vs1%, v0"
+"vsbc.vvm" = "$name$ %vd%, %vs2%, %vs1%, v0"
+
+[format_5-0.repr]
+default = "$name$ %vd%, %vs2%, %rs1_Register_int%, v0"
+"vmadc.vx" = "$name$ %vd%, %vs2%, %rs1_Register_int%"
+"vmsbc.vx" = "$name$ %vd%, %vs2%, %rs1_Register_int%"
+
+[format_5-1.repr]
+default = "$name$ %vd%, %vs2%, %rs1_Register_float%, v0"
+
+[format_6-0.repr]
+default = "$name$ %vd%, %vs2%, %himm%%vm%"
+
+[format_7-0.repr]
+default = "$name$ %rd_Register_int%, %vs2%%vm%"
+
+[format_8-0.repr]
+default = "$name$ %vd%, %vs2%%vm%"
+
+[format_9-0.repr]
+default = "$name$ %rd_Register_int%, %vs2%"
+
+[format_9-1.repr]
+default = "$name$ %rd_Register_float%, %vs2%"
+
+[format_10-0.repr]
+default = "$name$ %vd%, (%rs1_Register_int%)"
+"vmv.s.x" = "$name$ %vd%, %rs1_Register_int%"
+"vmv.v.x" = "$name$ %vd%, %rs1_Register_int%"
+
+[format_10-1.repr]
+default = "$name$ %vd%, %rs1_Register_float%"
+
+[format_11-0.repr]
+default = "$name$ %vd%%vm%"
+
+[format_12-0.repr]
+default = "vl%nf%e16.v %vd%, (%rs1_Register_int%)%vm%"
+"vle16ff.v" = "vl%nf%e16ff.v %vd%, (%rs1_Register_int%)%vm%"
+"vle32.v" = "vl%nf%e32.v %vd%, (%rs1_Register_int%)%vm%"
+"vle32ff.v" = "vl%nf%e32ff.v %vd%, (%rs1_Register_int%)%vm%"
+"vle64.v" = "vl%nf%e64.v %vd%, (%rs1_Register_int%)%vm%"
+"vle64ff.v" = "vl%nf%e64ff.v %vd%, (%rs1_Register_int%)%vm%"
+"vle8.v" = "vl%nf%e8.v %vd%, (%rs1_Register_int%)%vm%"
+"vle8ff.v" = "vl%nf%e8ff.v %vd%, (%rs1_Register_int%)%vm%"
+
+[format_13-0.repr]
+default = "vlox%nf%ei16.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vloxei32.v" = "vlox%nf%ei32.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vloxei64.v" = "vlox%nf%ei64.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vloxei8.v" = "vlox%nf%ei8.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vluxei16.v" = "vlux%nf%ei16.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vluxei32.v" = "vlux%nf%ei32.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vluxei64.v" = "vlux%nf%ei64.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+"vluxei8.v" = "vlux%nf%ei8.v %vd%, (%rs1_Register_int%), %vs2%%vm%"
+
+[format_14-0.repr]
+default = "vls%nf%e16.v %vd%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vlse32.v" = "vls%nf%e32.v %vd%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vlse64.v" = "vls%nf%e64.v %vd%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vlse8.v" = "vls%nf%e8.v %vd%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+
+[format_15-0.repr]
+default = "$name$ %vd%, %vs2%"
+
+[format_16-0.repr]
+default = "$name$ %vd%, %himm%"
+
+[format_17-0.repr]
+default = "$name$ %vd%, %vs1%"
+
+[format_18-0.repr]
+default = "$name$ %vs3%, (%rs1_Register_int%)"
+
+[format_19-0.repr]
+default = "vs%nf%e16.v %vs3%, (%rs1_Register_int%)%vm%"
+"vse32.v" = "vs%nf%e32.v %vs3%, (%rs1_Register_int%)%vm%"
+"vse64.v" = "vs%nf%e64.v %vs3%, (%rs1_Register_int%)%vm%"
+"vse8.v" = "vs%nf%e8.v %vs3%, (%rs1_Register_int%)%vm%"
+
+[format_20-0.repr]
+default = "$name$ %rd_Register_int%, %himm%, %zimm10%"
+
+[format_21-0.repr]
+default = "$name$ %rd_Register_int%, %rs1_Register_int%, %rs2_Register_int%"
+
+[format_22-0.repr]
+default = "$name$ %rd_Register_int%, %rs1_Register_int%, %zimm11%"
+
+[format_23-0.repr]
+default = "vsox%nf%ei16.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsoxei32.v" = "vsox%nf%ei32.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsoxei64.v" = "vsox%nf%ei64.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsoxei8.v" = "vsox%nf%ei8.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsuxei16.v" = "vsux%nf%ei16.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsuxei32.v" = "vsux%nf%ei32.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsuxei64.v" = "vsux%nf%ei64.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+"vsuxei8.v" = "vsux%nf%ei8.v %vs3%, (%rs1_Register_int%), %vs2%%vm%"
+
+[format_24-0.repr]
+default = "vss%nf%e16.v %vs3%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vsse32.v" = "vss%nf%e32.v %vs3%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vsse64.v" = "vss%nf%e64.v %vs3%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+"vsse8.v" = "vss%nf%e8.v %vs3%, (%rs1_Register_int%), %rs2_Register_int%%vm%"
+
+[mappings.Mapping_vtypei]
+0x0 = "e8, m1, tu, mu"
+0x1 = "e8, m2, tu, mu"
+0x2 = "e8, m4, tu, mu"
+0x3 = "e8, m8, tu, mu"
+0x5 = "e8, mf8, tu, mu"
+0x6 = "e8, mf4, tu, mu"
+0x7 = "e8, mf2, tu, mu"
+0x8 = "e16, m1, tu, mu"
+0x9 = "e16, m2, tu, mu"
+0xa = "e16, m4, tu, mu"
+0xb = "e16, m8, tu, mu"
+0xd = "e16, mf8, tu, mu"
+0xe = "e16, mf4, tu, mu"
+0xf = "e16, mf2, tu, mu"
+0x10 = "e32, m1, tu, mu"
+0x11 = "e32, m2, tu, mu"
+0x12 = "e32, m4, tu, mu"
+0x13 = "e32, m8, tu, mu"
+0x15 = "e32, mf8, tu, mu"
+0x16 = "e32, mf4, tu, mu"
+0x17 = "e32, mf2, tu, mu"
+0x18 = "e64, m1, tu, mu"
+0x19 = "e64, m2, tu, mu"
+0x1a = "e64, m4, tu, mu"
+0x1b = "e64, m8, tu, mu"
+0x1d = "e64, mf8, tu, mu"
+0x1e = "e64, mf4, tu, mu"
+0x1f = "e64, mf2, tu, mu"
+0x40 = "e8, m1, ta, mu"
+0x41 = "e8, m2, ta, mu"
+0x42 = "e8, m4, ta, mu"
+0x43 = "e8, m8, ta, mu"
+0x45 = "e8, mf8, ta, mu"
+0x46 = "e8, mf4, ta, mu"
+0x47 = "e8, mf2, ta, mu"
+0x48 = "e16, m1, ta, mu"
+0x49 = "e16, m2, ta, mu"
+0x4a = "e16, m4, ta, mu"
+0x4b = "e16, m8, ta, mu"
+0x4d = "e16, mf8, ta, mu"
+0x4e = "e16, mf4, ta, mu"
+0x4f = "e16, mf2, ta, mu"
+0x50 = "e32, m1, ta, mu"
+0x51 = "e32, m2, ta, mu"
+0x52 = "e32, m4, ta, mu"
+0x53 = "e32, m8, ta, mu"
+0x55 = "e32, mf8, ta, mu"
+0x56 = "e32, mf4, ta, mu"
+0x57 = "e32, mf2, ta, mu"
+0x58 = "e64, m1, ta, mu"
+0x59 = "e64, m2, ta, mu"
+0x5a = "e64, m4, ta, mu"
+0x5b = "e64, m8, ta, mu"
+0x5d = "e64, mf8, ta, mu"
+0x5e = "e64, mf4, ta, mu"
+0x5f = "e64, mf2, ta, mu"
+0x80 = "e8, m1, tu, ma"
+0x81 = "e8, m2, tu, ma"
+0x82 = "e8, m4, tu, ma"
+0x83 = "e8, m8, tu, ma"
+0x85 = "e8, mf8, tu, ma"
+0x86 = "e8, mf4, tu, ma"
+0x87 = "e8, mf2, tu, ma"
+0x88 = "e16, m1, tu, ma"
+0x89 = "e16, m2, tu, ma"
+0x8a = "e16, m4, tu, ma"
+0x8b = "e16, m8, tu, ma"
+0x8d = "e16, mf8, tu, ma"
+0x8e = "e16, mf4, tu, ma"
+0x8f = "e16, mf2, tu, ma"
+0x90 = "e32, m1, tu, ma"
+0x91 = "e32, m2, tu, ma"
+0x92 = "e32, m4, tu, ma"
+0x93 = "e32, m8, tu, ma"
+0x95 = "e32, mf8, tu, ma"
+0x96 = "e32, mf4, tu, ma"
+0x97 = "e32, mf2, tu, ma"
+0x98 = "e64, m1, tu, ma"
+0x99 = "e64, m2, tu, ma"
+0x9a = "e64, m4, tu, ma"
+0x9b = "e64, m8, tu, ma"
+0x9d = "e64, mf8, tu, ma"
+0x9e = "e64, mf4, tu, ma"
+0x9f = "e64, mf2, tu, ma"
+0xc0 = "e8, m1, ta, ma"
+0xc1 = "e8, m2, ta, ma"
+0xc2 = "e8, m4, ta, ma"
+0xc3 = "e8, m8, ta, ma"
+0xc5 = "e8, mf8, ta, ma"
+0xc6 = "e8, mf4, ta, ma"
+0xc7 = "e8, mf2, ta, ma"
+0xc8 = "e16, m1, ta, ma"
+0xc9 = "e16, m2, ta, ma"
+0xca = "e16, m4, ta, ma"
+0xcb = "e16, m8, ta, ma"
+0xcd = "e16, mf8, ta, ma"
+0xce = "e16, mf4, ta, ma"
+0xcf = "e16, mf2, ta, ma"
+0xd0 = "e32, m1, ta, ma"
+0xd1 = "e32, m2, ta, ma"
+0xd2 = "e32, m4, ta, ma"
+0xd3 = "e32, m8, ta, ma"
+0xd5 = "e32, mf8, ta, ma"
+0xd6 = "e32, mf4, ta, ma"
+0xd7 = "e32, mf2, ta, ma"
+0xd8 = "e64, m1, ta, ma"
+0xd9 = "e64, m2, ta, ma"
+0xda = "e64, m4, ta, ma"
+0xdb = "e64, m8, ta, ma"
+0xdd = "e64, mf8, ta, ma"
+0xde = "e64, mf4, ta, ma"
+0xdf = "e64, mf2, ta, ma"
+
+[format_1-0.instructions."vaadd.vv"]
+mask = 0xfc00707f
+match = 0x24002057
+
+[format_1-0.instructions."vaaddu.vv"]
+mask = 0xfc00707f
+match = 0x20002057
+
+[format_1-0.instructions."vadd.vv"]
+mask = 0xfc00707f
+match = 0x57
+
+[format_1-0.instructions."vand.vv"]
+mask = 0xfc00707f
+match = 0x24000057
+
+[format_1-0.instructions."vasub.vv"]
+mask = 0xfc00707f
+match = 0x2c002057
+
+[format_1-0.instructions."vasubu.vv"]
+mask = 0xfc00707f
+match = 0x28002057
+
+[format_1-0.instructions."vdiv.vv"]
+mask = 0xfc00707f
+match = 0x84002057
+
+[format_1-0.instructions."vdivu.vv"]
+mask = 0xfc00707f
+match = 0x80002057
+
+[format_1-0.instructions."vfadd.vv"]
+mask = 0xfc00707f
+match = 0x1057
+
+[format_1-0.instructions."vfdiv.vv"]
+mask = 0xfc00707f
+match = 0x80001057
+
+[format_1-0.instructions."vfmacc.vv"]
+mask = 0xfc00707f
+match = 0xb0001057
+
+[format_1-0.instructions."vfmadd.vv"]
+mask = 0xfc00707f
+match = 0xa0001057
+
+[format_1-0.instructions."vfmax.vv"]
+mask = 0xfc00707f
+match = 0x18001057
+
+[format_1-0.instructions."vfmin.vv"]
+mask = 0xfc00707f
+match = 0x10001057
+
+[format_1-0.instructions."vfmsac.vv"]
+mask = 0xfc00707f
+match = 0xb8001057
+
+[format_1-0.instructions."vfmsub.vv"]
+mask = 0xfc00707f
+match = 0xa8001057
+
+[format_1-0.instructions."vfmul.vv"]
+mask = 0xfc00707f
+match = 0x90001057
+
+[format_1-0.instructions."vfnmacc.vv"]
+mask = 0xfc00707f
+match = 0xb4001057
+
+[format_1-0.instructions."vfnmadd.vv"]
+mask = 0xfc00707f
+match = 0xa4001057
+
+[format_1-0.instructions."vfnmsac.vv"]
+mask = 0xfc00707f
+match = 0xbc001057
+
+[format_1-0.instructions."vfnmsub.vv"]
+mask = 0xfc00707f
+match = 0xac001057
+
+[format_1-0.instructions."vfredmax.vs"]
+mask = 0xfc00707f
+match = 0x1c001057
+
+[format_1-0.instructions."vfredmin.vs"]
+mask = 0xfc00707f
+match = 0x14001057
+
+[format_1-0.instructions."vfredosum.vs"]
+mask = 0xfc00707f
+match = 0xc001057
+
+[format_1-0.instructions."vfredusum.vs"]
+mask = 0xfc00707f
+match = 0x4001057
+
+[format_1-0.instructions."vfsgnj.vv"]
+mask = 0xfc00707f
+match = 0x20001057
+
+[format_1-0.instructions."vfsgnjn.vv"]
+mask = 0xfc00707f
+match = 0x24001057
+
+[format_1-0.instructions."vfsgnjx.vv"]
+mask = 0xfc00707f
+match = 0x28001057
+
+[format_1-0.instructions."vfsub.vv"]
+mask = 0xfc00707f
+match = 0x8001057
+
+[format_1-0.instructions."vfwadd.vv"]
+mask = 0xfc00707f
+match = 0xc0001057
+
+[format_1-0.instructions."vfwadd.wv"]
+mask = 0xfc00707f
+match = 0xd0001057
+
+[format_1-0.instructions."vfwmacc.vv"]
+mask = 0xfc00707f
+match = 0xf0001057
+
+[format_1-0.instructions."vfwmsac.vv"]
+mask = 0xfc00707f
+match = 0xf8001057
+
+[format_1-0.instructions."vfwmul.vv"]
+mask = 0xfc00707f
+match = 0xe0001057
+
+[format_1-0.instructions."vfwnmacc.vv"]
+mask = 0xfc00707f
+match = 0xf4001057
+
+[format_1-0.instructions."vfwnmsac.vv"]
+mask = 0xfc00707f
+match = 0xfc001057
+
+[format_1-0.instructions."vfwredosum.vs"]
+mask = 0xfc00707f
+match = 0xcc001057
+
+[format_1-0.instructions."vfwredusum.vs"]
+mask = 0xfc00707f
+match = 0xc4001057
+
+[format_1-0.instructions."vfwsub.vv"]
+mask = 0xfc00707f
+match = 0xc8001057
+
+[format_1-0.instructions."vfwsub.wv"]
+mask = 0xfc00707f
+match = 0xd8001057
+
+[format_1-0.instructions."vmacc.vv"]
+mask = 0xfc00707f
+match = 0xb4002057
+
+[format_1-0.instructions."vmadd.vv"]
+mask = 0xfc00707f
+match = 0xa4002057
+
+[format_1-0.instructions."vmax.vv"]
+mask = 0xfc00707f
+match = 0x1c000057
+
+[format_1-0.instructions."vmaxu.vv"]
+mask = 0xfc00707f
+match = 0x18000057
+
+[format_1-0.instructions."vmfeq.vv"]
+mask = 0xfc00707f
+match = 0x60001057
+
+[format_1-0.instructions."vmfle.vv"]
+mask = 0xfc00707f
+match = 0x64001057
+
+[format_1-0.instructions."vmflt.vv"]
+mask = 0xfc00707f
+match = 0x6c001057
+
+[format_1-0.instructions."vmfne.vv"]
+mask = 0xfc00707f
+match = 0x70001057
+
+[format_1-0.instructions."vmin.vv"]
+mask = 0xfc00707f
+match = 0x14000057
+
+[format_1-0.instructions."vminu.vv"]
+mask = 0xfc00707f
+match = 0x10000057
+
+[format_1-0.instructions."vmseq.vv"]
+mask = 0xfc00707f
+match = 0x60000057
+
+[format_1-0.instructions."vmsle.vv"]
+mask = 0xfc00707f
+match = 0x74000057
+
+[format_1-0.instructions."vmsleu.vv"]
+mask = 0xfc00707f
+match = 0x70000057
+
+[format_1-0.instructions."vmslt.vv"]
+mask = 0xfc00707f
+match = 0x6c000057
+
+[format_1-0.instructions."vmsltu.vv"]
+mask = 0xfc00707f
+match = 0x68000057
+
+[format_1-0.instructions."vmsne.vv"]
+mask = 0xfc00707f
+match = 0x64000057
+
+[format_1-0.instructions."vmul.vv"]
+mask = 0xfc00707f
+match = 0x94002057
+
+[format_1-0.instructions."vmulh.vv"]
+mask = 0xfc00707f
+match = 0x9c002057
+
+[format_1-0.instructions."vmulhsu.vv"]
+mask = 0xfc00707f
+match = 0x98002057
+
+[format_1-0.instructions."vmulhu.vv"]
+mask = 0xfc00707f
+match = 0x90002057
+
+[format_1-0.instructions."vnclip.wv"]
+mask = 0xfc00707f
+match = 0xbc000057
+
+[format_1-0.instructions."vnclipu.wv"]
+mask = 0xfc00707f
+match = 0xb8000057
+
+[format_1-0.instructions."vnmsac.vv"]
+mask = 0xfc00707f
+match = 0xbc002057
+
+[format_1-0.instructions."vnmsub.vv"]
+mask = 0xfc00707f
+match = 0xac002057
+
+[format_1-0.instructions."vnsra.wv"]
+mask = 0xfc00707f
+match = 0xb4000057
+
+[format_1-0.instructions."vnsrl.wv"]
+mask = 0xfc00707f
+match = 0xb0000057
+
+[format_1-0.instructions."vor.vv"]
+mask = 0xfc00707f
+match = 0x28000057
+
+[format_1-0.instructions."vredand.vs"]
+mask = 0xfc00707f
+match = 0x4002057
+
+[format_1-0.instructions."vredmax.vs"]
+mask = 0xfc00707f
+match = 0x1c002057
+
+[format_1-0.instructions."vredmaxu.vs"]
+mask = 0xfc00707f
+match = 0x18002057
+
+[format_1-0.instructions."vredmin.vs"]
+mask = 0xfc00707f
+match = 0x14002057
+
+[format_1-0.instructions."vredminu.vs"]
+mask = 0xfc00707f
+match = 0x10002057
+
+[format_1-0.instructions."vredor.vs"]
+mask = 0xfc00707f
+match = 0x8002057
+
+[format_1-0.instructions."vredsum.vs"]
+mask = 0xfc00707f
+match = 0x2057
+
+[format_1-0.instructions."vredxor.vs"]
+mask = 0xfc00707f
+match = 0xc002057
+
+[format_1-0.instructions."vrem.vv"]
+mask = 0xfc00707f
+match = 0x8c002057
+
+[format_1-0.instructions."vremu.vv"]
+mask = 0xfc00707f
+match = 0x88002057
+
+[format_1-0.instructions."vrgather.vv"]
+mask = 0xfc00707f
+match = 0x30000057
+
+[format_1-0.instructions."vrgatherei16.vv"]
+mask = 0xfc00707f
+match = 0x38000057
+
+[format_1-0.instructions."vsadd.vv"]
+mask = 0xfc00707f
+match = 0x84000057
+
+[format_1-0.instructions."vsaddu.vv"]
+mask = 0xfc00707f
+match = 0x80000057
+
+[format_1-0.instructions."vsll.vv"]
+mask = 0xfc00707f
+match = 0x94000057
+
+[format_1-0.instructions."vsmul.vv"]
+mask = 0xfc00707f
+match = 0x9c000057
+
+[format_1-0.instructions."vsra.vv"]
+mask = 0xfc00707f
+match = 0xa4000057
+
+[format_1-0.instructions."vsrl.vv"]
+mask = 0xfc00707f
+match = 0xa0000057
+
+[format_1-0.instructions."vssra.vv"]
+mask = 0xfc00707f
+match = 0xac000057
+
+[format_1-0.instructions."vssrl.vv"]
+mask = 0xfc00707f
+match = 0xa8000057
+
+[format_1-0.instructions."vssub.vv"]
+mask = 0xfc00707f
+match = 0x8c000057
+
+[format_1-0.instructions."vssubu.vv"]
+mask = 0xfc00707f
+match = 0x88000057
+
+[format_1-0.instructions."vsub.vv"]
+mask = 0xfc00707f
+match = 0x8000057
+
+[format_1-0.instructions."vwadd.vv"]
+mask = 0xfc00707f
+match = 0xc4002057
+
+[format_1-0.instructions."vwadd.wv"]
+mask = 0xfc00707f
+match = 0xd4002057
+
+[format_1-0.instructions."vwaddu.vv"]
+mask = 0xfc00707f
+match = 0xc0002057
+
+[format_1-0.instructions."vwaddu.wv"]
+mask = 0xfc00707f
+match = 0xd0002057
+
+[format_1-0.instructions."vwmacc.vv"]
+mask = 0xfc00707f
+match = 0xf4002057
+
+[format_1-0.instructions."vwmaccsu.vv"]
+mask = 0xfc00707f
+match = 0xfc002057
+
+[format_1-0.instructions."vwmaccu.vv"]
+mask = 0xfc00707f
+match = 0xf0002057
+
+[format_1-0.instructions."vwmul.vv"]
+mask = 0xfc00707f
+match = 0xec002057
+
+[format_1-0.instructions."vwmulsu.vv"]
+mask = 0xfc00707f
+match = 0xe8002057
+
+[format_1-0.instructions."vwmulu.vv"]
+mask = 0xfc00707f
+match = 0xe0002057
+
+[format_1-0.instructions."vwredsum.vs"]
+mask = 0xfc00707f
+match = 0xc4000057
+
+[format_1-0.instructions."vwredsumu.vs"]
+mask = 0xfc00707f
+match = 0xc0000057
+
+[format_1-0.instructions."vwsub.vv"]
+mask = 0xfc00707f
+match = 0xcc002057
+
+[format_1-0.instructions."vwsub.wv"]
+mask = 0xfc00707f
+match = 0xdc002057
+
+[format_1-0.instructions."vwsubu.vv"]
+mask = 0xfc00707f
+match = 0xc8002057
+
+[format_1-0.instructions."vwsubu.wv"]
+mask = 0xfc00707f
+match = 0xd8002057
+
+[format_1-0.instructions."vxor.vv"]
+mask = 0xfc00707f
+match = 0x2c000057
+
+[format_2-0.instructions."vaadd.vx"]
+mask = 0xfc00707f
+match = 0x24006057
+
+[format_2-0.instructions."vaaddu.vx"]
+mask = 0xfc00707f
+match = 0x20006057
+
+[format_2-0.instructions."vadd.vx"]
+mask = 0xfc00707f
+match = 0x4057
+
+[format_2-0.instructions."vand.vx"]
+mask = 0xfc00707f
+match = 0x24004057
+
+[format_2-0.instructions."vasub.vx"]
+mask = 0xfc00707f
+match = 0x2c006057
+
+[format_2-0.instructions."vasubu.vx"]
+mask = 0xfc00707f
+match = 0x28006057
+
+[format_2-0.instructions."vdiv.vx"]
+mask = 0xfc00707f
+match = 0x84006057
+
+[format_2-0.instructions."vdivu.vx"]
+mask = 0xfc00707f
+match = 0x80006057
+
+[format_2-0.instructions."vmacc.vx"]
+mask = 0xfc00707f
+match = 0xb4006057
+
+[format_2-0.instructions."vmadd.vx"]
+mask = 0xfc00707f
+match = 0xa4006057
+
+[format_2-0.instructions."vmax.vx"]
+mask = 0xfc00707f
+match = 0x1c004057
+
+[format_2-0.instructions."vmaxu.vx"]
+mask = 0xfc00707f
+match = 0x18004057
+
+[format_2-0.instructions."vmin.vx"]
+mask = 0xfc00707f
+match = 0x14004057
+
+[format_2-0.instructions."vminu.vx"]
+mask = 0xfc00707f
+match = 0x10004057
+
+[format_2-0.instructions."vmseq.vx"]
+mask = 0xfc00707f
+match = 0x60004057
+
+[format_2-0.instructions."vmsgt.vx"]
+mask = 0xfc00707f
+match = 0x7c004057
+
+[format_2-0.instructions."vmsgtu.vx"]
+mask = 0xfc00707f
+match = 0x78004057
+
+[format_2-0.instructions."vmsle.vx"]
+mask = 0xfc00707f
+match = 0x74004057
+
+[format_2-0.instructions."vmsleu.vx"]
+mask = 0xfc00707f
+match = 0x70004057
+
+[format_2-0.instructions."vmslt.vx"]
+mask = 0xfc00707f
+match = 0x6c004057
+
+[format_2-0.instructions."vmsltu.vx"]
+mask = 0xfc00707f
+match = 0x68004057
+
+[format_2-0.instructions."vmsne.vx"]
+mask = 0xfc00707f
+match = 0x64004057
+
+[format_2-0.instructions."vmul.vx"]
+mask = 0xfc00707f
+match = 0x94006057
+
+[format_2-0.instructions."vmulh.vx"]
+mask = 0xfc00707f
+match = 0x9c006057
+
+[format_2-0.instructions."vmulhsu.vx"]
+mask = 0xfc00707f
+match = 0x98006057
+
+[format_2-0.instructions."vmulhu.vx"]
+mask = 0xfc00707f
+match = 0x90006057
+
+[format_2-0.instructions."vnclip.wx"]
+mask = 0xfc00707f
+match = 0xbc004057
+
+[format_2-0.instructions."vnclipu.wx"]
+mask = 0xfc00707f
+match = 0xb8004057
+
+[format_2-0.instructions."vnmsac.vx"]
+mask = 0xfc00707f
+match = 0xbc006057
+
+[format_2-0.instructions."vnmsub.vx"]
+mask = 0xfc00707f
+match = 0xac006057
+
+[format_2-0.instructions."vnsra.wx"]
+mask = 0xfc00707f
+match = 0xb4004057
+
+[format_2-0.instructions."vnsrl.wx"]
+mask = 0xfc00707f
+match = 0xb0004057
+
+[format_2-0.instructions."vor.vx"]
+mask = 0xfc00707f
+match = 0x28004057
+
+[format_2-0.instructions."vrem.vx"]
+mask = 0xfc00707f
+match = 0x8c006057
+
+[format_2-0.instructions."vremu.vx"]
+mask = 0xfc00707f
+match = 0x88006057
+
+[format_2-0.instructions."vrgather.vx"]
+mask = 0xfc00707f
+match = 0x30004057
+
+[format_2-0.instructions."vrsub.vx"]
+mask = 0xfc00707f
+match = 0xc004057
+
+[format_2-0.instructions."vsadd.vx"]
+mask = 0xfc00707f
+match = 0x84004057
+
+[format_2-0.instructions."vsaddu.vx"]
+mask = 0xfc00707f
+match = 0x80004057
+
+[format_2-0.instructions."vslide1down.vx"]
+mask = 0xfc00707f
+match = 0x3c006057
+
+[format_2-0.instructions."vslide1up.vx"]
+mask = 0xfc00707f
+match = 0x38006057
+
+[format_2-0.instructions."vslidedown.vx"]
+mask = 0xfc00707f
+match = 0x3c004057
+
+[format_2-0.instructions."vslideup.vx"]
+mask = 0xfc00707f
+match = 0x38004057
+
+[format_2-0.instructions."vsll.vx"]
+mask = 0xfc00707f
+match = 0x94004057
+
+[format_2-0.instructions."vsmul.vx"]
+mask = 0xfc00707f
+match = 0x9c004057
+
+[format_2-0.instructions."vsra.vx"]
+mask = 0xfc00707f
+match = 0xa4004057
+
+[format_2-0.instructions."vsrl.vx"]
+mask = 0xfc00707f
+match = 0xa0004057
+
+[format_2-0.instructions."vssra.vx"]
+mask = 0xfc00707f
+match = 0xac004057
+
+[format_2-0.instructions."vssrl.vx"]
+mask = 0xfc00707f
+match = 0xa8004057
+
+[format_2-0.instructions."vssub.vx"]
+mask = 0xfc00707f
+match = 0x8c004057
+
+[format_2-0.instructions."vssubu.vx"]
+mask = 0xfc00707f
+match = 0x88004057
+
+[format_2-0.instructions."vsub.vx"]
+mask = 0xfc00707f
+match = 0x8004057
+
+[format_2-0.instructions."vwadd.vx"]
+mask = 0xfc00707f
+match = 0xc4006057
+
+[format_2-0.instructions."vwadd.wx"]
+mask = 0xfc00707f
+match = 0xd4006057
+
+[format_2-0.instructions."vwaddu.vx"]
+mask = 0xfc00707f
+match = 0xc0006057
+
+[format_2-0.instructions."vwaddu.wx"]
+mask = 0xfc00707f
+match = 0xd0006057
+
+[format_2-0.instructions."vwmacc.vx"]
+mask = 0xfc00707f
+match = 0xf4006057
+
+[format_2-0.instructions."vwmaccsu.vx"]
+mask = 0xfc00707f
+match = 0xfc006057
+
+[format_2-0.instructions."vwmaccu.vx"]
+mask = 0xfc00707f
+match = 0xf0006057
+
+[format_2-0.instructions."vwmaccus.vx"]
+mask = 0xfc00707f
+match = 0xf8006057
+
+[format_2-0.instructions."vwmul.vx"]
+mask = 0xfc00707f
+match = 0xec006057
+
+[format_2-0.instructions."vwmulsu.vx"]
+mask = 0xfc00707f
+match = 0xe8006057
+
+[format_2-0.instructions."vwmulu.vx"]
+mask = 0xfc00707f
+match = 0xe0006057
+
+[format_2-0.instructions."vwsub.vx"]
+mask = 0xfc00707f
+match = 0xcc006057
+
+[format_2-0.instructions."vwsub.wx"]
+mask = 0xfc00707f
+match = 0xdc006057
+
+[format_2-0.instructions."vwsubu.vx"]
+mask = 0xfc00707f
+match = 0xc8006057
+
+[format_2-0.instructions."vwsubu.wx"]
+mask = 0xfc00707f
+match = 0xd8006057
+
+[format_2-0.instructions."vxor.vx"]
+mask = 0xfc00707f
+match = 0x2c004057
+
+[format_2-1.instructions."vfadd.vf"]
+mask = 0xfc00707f
+match = 0x5057
+
+[format_2-1.instructions."vfdiv.vf"]
+mask = 0xfc00707f
+match = 0x80005057
+
+[format_2-1.instructions."vfmacc.vf"]
+mask = 0xfc00707f
+match = 0xb0005057
+
+[format_2-1.instructions."vfmadd.vf"]
+mask = 0xfc00707f
+match = 0xa0005057
+
+[format_2-1.instructions."vfmax.vf"]
+mask = 0xfc00707f
+match = 0x18005057
+
+[format_2-1.instructions."vfmin.vf"]
+mask = 0xfc00707f
+match = 0x10005057
+
+[format_2-1.instructions."vfmsac.vf"]
+mask = 0xfc00707f
+match = 0xb8005057
+
+[format_2-1.instructions."vfmsub.vf"]
+mask = 0xfc00707f
+match = 0xa8005057
+
+[format_2-1.instructions."vfmul.vf"]
+mask = 0xfc00707f
+match = 0x90005057
+
+[format_2-1.instructions."vfnmacc.vf"]
+mask = 0xfc00707f
+match = 0xb4005057
+
+[format_2-1.instructions."vfnmadd.vf"]
+mask = 0xfc00707f
+match = 0xa4005057
+
+[format_2-1.instructions."vfnmsac.vf"]
+mask = 0xfc00707f
+match = 0xbc005057
+
+[format_2-1.instructions."vfnmsub.vf"]
+mask = 0xfc00707f
+match = 0xac005057
+
+[format_2-1.instructions."vfrdiv.vf"]
+mask = 0xfc00707f
+match = 0x84005057
+
+[format_2-1.instructions."vfrsub.vf"]
+mask = 0xfc00707f
+match = 0x9c005057
+
+[format_2-1.instructions."vfsgnj.vf"]
+mask = 0xfc00707f
+match = 0x20005057
+
+[format_2-1.instructions."vfsgnjn.vf"]
+mask = 0xfc00707f
+match = 0x24005057
+
+[format_2-1.instructions."vfsgnjx.vf"]
+mask = 0xfc00707f
+match = 0x28005057
+
+[format_2-1.instructions."vfslide1down.vf"]
+mask = 0xfc00707f
+match = 0x3c005057
+
+[format_2-1.instructions."vfslide1up.vf"]
+mask = 0xfc00707f
+match = 0x38005057
+
+[format_2-1.instructions."vfsub.vf"]
+mask = 0xfc00707f
+match = 0x8005057
+
+[format_2-1.instructions."vfwadd.vf"]
+mask = 0xfc00707f
+match = 0xc0005057
+
+[format_2-1.instructions."vfwadd.wf"]
+mask = 0xfc00707f
+match = 0xd0005057
+
+[format_2-1.instructions."vfwmacc.vf"]
+mask = 0xfc00707f
+match = 0xf0005057
+
+[format_2-1.instructions."vfwmsac.vf"]
+mask = 0xfc00707f
+match = 0xf8005057
+
+[format_2-1.instructions."vfwmul.vf"]
+mask = 0xfc00707f
+match = 0xe0005057
+
+[format_2-1.instructions."vfwnmacc.vf"]
+mask = 0xfc00707f
+match = 0xf4005057
+
+[format_2-1.instructions."vfwnmsac.vf"]
+mask = 0xfc00707f
+match = 0xfc005057
+
+[format_2-1.instructions."vfwsub.vf"]
+mask = 0xfc00707f
+match = 0xc8005057
+
+[format_2-1.instructions."vfwsub.wf"]
+mask = 0xfc00707f
+match = 0xd8005057
+
+[format_2-1.instructions."vmfeq.vf"]
+mask = 0xfc00707f
+match = 0x60005057
+
+[format_2-1.instructions."vmfge.vf"]
+mask = 0xfc00707f
+match = 0x7c005057
+
+[format_2-1.instructions."vmfgt.vf"]
+mask = 0xfc00707f
+match = 0x74005057
+
+[format_2-1.instructions."vmfle.vf"]
+mask = 0xfc00707f
+match = 0x64005057
+
+[format_2-1.instructions."vmflt.vf"]
+mask = 0xfc00707f
+match = 0x6c005057
+
+[format_2-1.instructions."vmfne.vf"]
+mask = 0xfc00707f
+match = 0x70005057
+
+[format_3-0.instructions."vadc.vim"]
+mask = 0xfe00707f
+match = 0x40003057
+
+[format_3-0.instructions."vmadc.vi"]
+mask = 0xfe00707f
+match = 0x46003057
+
+[format_3-0.instructions."vmadc.vim"]
+mask = 0xfe00707f
+match = 0x44003057
+
+[format_3-0.instructions."vmerge.vim"]
+mask = 0xfe00707f
+match = 0x5c003057
+
+[format_4-0.instructions."vadc.vvm"]
+mask = 0xfe00707f
+match = 0x40000057
+
+[format_4-0.instructions."vcompress.vm"]
+mask = 0xfe00707f
+match = 0x5e002057
+
+[format_4-0.instructions."vmadc.vv"]
+mask = 0xfe00707f
+match = 0x46000057
+
+[format_4-0.instructions."vmadc.vvm"]
+mask = 0xfe00707f
+match = 0x44000057
+
+[format_4-0.instructions."vmand.mm"]
+mask = 0xfe00707f
+match = 0x66002057
+
+[format_4-0.instructions."vmandn.mm"]
+mask = 0xfe00707f
+match = 0x62002057
+
+[format_4-0.instructions."vmerge.vvm"]
+mask = 0xfe00707f
+match = 0x5c000057
+
+[format_4-0.instructions."vmnand.mm"]
+mask = 0xfe00707f
+match = 0x76002057
+
+[format_4-0.instructions."vmnor.mm"]
+mask = 0xfe00707f
+match = 0x7a002057
+
+[format_4-0.instructions."vmor.mm"]
+mask = 0xfe00707f
+match = 0x6a002057
+
+[format_4-0.instructions."vmorn.mm"]
+mask = 0xfe00707f
+match = 0x72002057
+
+[format_4-0.instructions."vmsbc.vv"]
+mask = 0xfe00707f
+match = 0x4e000057
+
+[format_4-0.instructions."vmsbc.vvm"]
+mask = 0xfe00707f
+match = 0x4c000057
+
+[format_4-0.instructions."vmxnor.mm"]
+mask = 0xfe00707f
+match = 0x7e002057
+
+[format_4-0.instructions."vmxor.mm"]
+mask = 0xfe00707f
+match = 0x6e002057
+
+[format_4-0.instructions."vsbc.vvm"]
+mask = 0xfe00707f
+match = 0x48000057
+
+[format_5-0.instructions."vadc.vxm"]
+mask = 0xfe00707f
+match = 0x40004057
+
+[format_5-0.instructions."vmadc.vx"]
+mask = 0xfe00707f
+match = 0x46004057
+
+[format_5-0.instructions."vmadc.vxm"]
+mask = 0xfe00707f
+match = 0x44004057
+
+[format_5-0.instructions."vmerge.vxm"]
+mask = 0xfe00707f
+match = 0x5c004057
+
+[format_5-0.instructions."vmsbc.vx"]
+mask = 0xfe00707f
+match = 0x4e004057
+
+[format_5-0.instructions."vmsbc.vxm"]
+mask = 0xfe00707f
+match = 0x4c004057
+
+[format_5-0.instructions."vsbc.vxm"]
+mask = 0xfe00707f
+match = 0x48004057
+
+[format_5-1.instructions."vfmerge.vfm"]
+mask = 0xfe00707f
+match = 0x5c005057
+
+[format_6-0.instructions."vadd.vi"]
+mask = 0xfc00707f
+match = 0x3057
+
+[format_6-0.instructions."vand.vi"]
+mask = 0xfc00707f
+match = 0x24003057
+
+[format_6-0.instructions."vmseq.vi"]
+mask = 0xfc00707f
+match = 0x60003057
+
+[format_6-0.instructions."vmsgt.vi"]
+mask = 0xfc00707f
+match = 0x7c003057
+
+[format_6-0.instructions."vmsgtu.vi"]
+mask = 0xfc00707f
+match = 0x78003057
+
+[format_6-0.instructions."vmsle.vi"]
+mask = 0xfc00707f
+match = 0x74003057
+
+[format_6-0.instructions."vmsleu.vi"]
+mask = 0xfc00707f
+match = 0x70003057
+
+[format_6-0.instructions."vmsne.vi"]
+mask = 0xfc00707f
+match = 0x64003057
+
+[format_6-0.instructions."vnclip.wi"]
+mask = 0xfc00707f
+match = 0xbc003057
+unsigned = true
+
+[format_6-0.instructions."vnclipu.wi"]
+mask = 0xfc00707f
+match = 0xb8003057
+unsigned = true
+
+[format_6-0.instructions."vnsra.wi"]
+mask = 0xfc00707f
+match = 0xb4003057
+unsigned = true
+
+[format_6-0.instructions."vnsrl.wi"]
+mask = 0xfc00707f
+match = 0xb0003057
+unsigned = true
+
+[format_6-0.instructions."vor.vi"]
+mask = 0xfc00707f
+match = 0x28003057
+
+[format_6-0.instructions."vrgather.vi"]
+mask = 0xfc00707f
+match = 0x30003057
+unsigned = true
+
+[format_6-0.instructions."vrsub.vi"]
+mask = 0xfc00707f
+match = 0xc003057
+
+[format_6-0.instructions."vsadd.vi"]
+mask = 0xfc00707f
+match = 0x84003057
+
+[format_6-0.instructions."vsaddu.vi"]
+mask = 0xfc00707f
+match = 0x80003057
+
+[format_6-0.instructions."vslidedown.vi"]
+mask = 0xfc00707f
+match = 0x3c003057
+unsigned = true
+
+[format_6-0.instructions."vslideup.vi"]
+mask = 0xfc00707f
+match = 0x38003057
+unsigned = true
+
+[format_6-0.instructions."vsll.vi"]
+mask = 0xfc00707f
+match = 0x94003057
+unsigned = true
+
+[format_6-0.instructions."vsra.vi"]
+mask = 0xfc00707f
+match = 0xa4003057
+unsigned = true
+
+[format_6-0.instructions."vsrl.vi"]
+mask = 0xfc00707f
+match = 0xa0003057
+unsigned = true
+
+[format_6-0.instructions."vssra.vi"]
+mask = 0xfc00707f
+match = 0xac003057
+unsigned = true
+
+[format_6-0.instructions."vssrl.vi"]
+mask = 0xfc00707f
+match = 0xa8003057
+unsigned = true
+
+[format_6-0.instructions."vxor.vi"]
+mask = 0xfc00707f
+match = 0x2c003057
+
+[format_7-0.instructions."vcpop.m"]
+mask = 0xfc0ff07f
+match = 0x40082057
+
+[format_7-0.instructions."vfirst.m"]
+mask = 0xfc0ff07f
+match = 0x4008a057
+
+[format_8-0.instructions."vfclass.v"]
+mask = 0xfc0ff07f
+match = 0x4c081057
+
+[format_8-0.instructions."vfcvt.f.x.v"]
+mask = 0xfc0ff07f
+match = 0x48019057
+
+[format_8-0.instructions."vfcvt.f.xu.v"]
+mask = 0xfc0ff07f
+match = 0x48011057
+
+[format_8-0.instructions."vfcvt.rtz.x.f.v"]
+mask = 0xfc0ff07f
+match = 0x48039057
+
+[format_8-0.instructions."vfcvt.rtz.xu.f.v"]
+mask = 0xfc0ff07f
+match = 0x48031057
+
+[format_8-0.instructions."vfcvt.x.f.v"]
+mask = 0xfc0ff07f
+match = 0x48009057
+
+[format_8-0.instructions."vfcvt.xu.f.v"]
+mask = 0xfc0ff07f
+match = 0x48001057
+
+[format_8-0.instructions."vfncvt.f.f.w"]
+mask = 0xfc0ff07f
+match = 0x480a1057
+
+[format_8-0.instructions."vfncvt.f.x.w"]
+mask = 0xfc0ff07f
+match = 0x48099057
+
+[format_8-0.instructions."vfncvt.f.xu.w"]
+mask = 0xfc0ff07f
+match = 0x48091057
+
+[format_8-0.instructions."vfncvt.rod.f.f.w"]
+mask = 0xfc0ff07f
+match = 0x480a9057
+
+[format_8-0.instructions."vfncvt.rtz.x.f.w"]
+mask = 0xfc0ff07f
+match = 0x480b9057
+
+[format_8-0.instructions."vfncvt.rtz.xu.f.w"]
+mask = 0xfc0ff07f
+match = 0x480b1057
+
+[format_8-0.instructions."vfncvt.x.f.w"]
+mask = 0xfc0ff07f
+match = 0x48089057
+
+[format_8-0.instructions."vfncvt.xu.f.w"]
+mask = 0xfc0ff07f
+match = 0x48081057
+
+[format_8-0.instructions."vfrec7.v"]
+mask = 0xfc0ff07f
+match = 0x4c029057
+
+[format_8-0.instructions."vfrsqrt7.v"]
+mask = 0xfc0ff07f
+match = 0x4c021057
+
+[format_8-0.instructions."vfsqrt.v"]
+mask = 0xfc0ff07f
+match = 0x4c001057
+
+[format_8-0.instructions."vfwcvt.f.f.v"]
+mask = 0xfc0ff07f
+match = 0x48061057
+
+[format_8-0.instructions."vfwcvt.f.x.v"]
+mask = 0xfc0ff07f
+match = 0x48059057
+
+[format_8-0.instructions."vfwcvt.f.xu.v"]
+mask = 0xfc0ff07f
+match = 0x48051057
+
+[format_8-0.instructions."vfwcvt.rtz.x.f.v"]
+mask = 0xfc0ff07f
+match = 0x48079057
+
+[format_8-0.instructions."vfwcvt.rtz.xu.f.v"]
+mask = 0xfc0ff07f
+match = 0x48071057
+
+[format_8-0.instructions."vfwcvt.x.f.v"]
+mask = 0xfc0ff07f
+match = 0x48049057
+
+[format_8-0.instructions."vfwcvt.xu.f.v"]
+mask = 0xfc0ff07f
+match = 0x48041057
+
+[format_8-0.instructions."viota.m"]
+mask = 0xfc0ff07f
+match = 0x50082057
+
+[format_8-0.instructions."vmsbf.m"]
+mask = 0xfc0ff07f
+match = 0x5000a057
+
+[format_8-0.instructions."vmsif.m"]
+mask = 0xfc0ff07f
+match = 0x5001a057
+
+[format_8-0.instructions."vmsof.m"]
+mask = 0xfc0ff07f
+match = 0x50012057
+
+[format_8-0.instructions."vsext.vf2"]
+mask = 0xfc0ff07f
+match = 0x4803a057
+
+[format_8-0.instructions."vsext.vf4"]
+mask = 0xfc0ff07f
+match = 0x4802a057
+
+[format_8-0.instructions."vsext.vf8"]
+mask = 0xfc0ff07f
+match = 0x4801a057
+
+[format_8-0.instructions."vzext.vf2"]
+mask = 0xfc0ff07f
+match = 0x48032057
+
+[format_8-0.instructions."vzext.vf4"]
+mask = 0xfc0ff07f
+match = 0x48022057
+
+[format_8-0.instructions."vzext.vf8"]
+mask = 0xfc0ff07f
+match = 0x48012057
+
+[format_9-0.instructions."vmv.x.s"]
+mask = 0xfe0ff07f
+match = 0x42002057
+
+[format_9-1.instructions."vfmv.f.s"]
+mask = 0xfe0ff07f
+match = 0x42001057
+
+[format_10-0.instructions."vl1re16.v"]
+mask = 0xfff0707f
+match = 0x2805007
+
+[format_10-0.instructions."vl1re32.v"]
+mask = 0xfff0707f
+match = 0x2806007
+
+[format_10-0.instructions."vl1re64.v"]
+mask = 0xfff0707f
+match = 0x2807007
+
+[format_10-0.instructions."vl1re8.v"]
+mask = 0xfff0707f
+match = 0x2800007
+
+[format_10-0.instructions."vl2re16.v"]
+mask = 0xfff0707f
+match = 0x22805007
+
+[format_10-0.instructions."vl2re32.v"]
+mask = 0xfff0707f
+match = 0x22806007
+
+[format_10-0.instructions."vl2re64.v"]
+mask = 0xfff0707f
+match = 0x22807007
+
+[format_10-0.instructions."vl2re8.v"]
+mask = 0xfff0707f
+match = 0x22800007
+
+[format_10-0.instructions."vl4re16.v"]
+mask = 0xfff0707f
+match = 0x62805007
+
+[format_10-0.instructions."vl4re32.v"]
+mask = 0xfff0707f
+match = 0x62806007
+
+[format_10-0.instructions."vl4re64.v"]
+mask = 0xfff0707f
+match = 0x62807007
+
+[format_10-0.instructions."vl4re8.v"]
+mask = 0xfff0707f
+match = 0x62800007
+
+[format_10-0.instructions."vl8re16.v"]
+mask = 0xfff0707f
+match = 0xe2805007
+
+[format_10-0.instructions."vl8re32.v"]
+mask = 0xfff0707f
+match = 0xe2806007
+
+[format_10-0.instructions."vl8re64.v"]
+mask = 0xfff0707f
+match = 0xe2807007
+
+[format_10-0.instructions."vl8re8.v"]
+mask = 0xfff0707f
+match = 0xe2800007
+
+[format_10-0.instructions."vlm.v"]
+mask = 0xfff0707f
+match = 0x2b00007
+
+[format_10-0.instructions."vmv.s.x"]
+mask = 0xfff0707f
+match = 0x42006057
+
+[format_10-0.instructions."vmv.v.x"]
+mask = 0xfff0707f
+match = 0x5e004057
+
+[format_10-1.instructions."vfmv.s.f"]
+mask = 0xfff0707f
+match = 0x42005057
+
+[format_10-1.instructions."vfmv.v.f"]
+mask = 0xfff0707f
+match = 0x5e005057
+
+[format_11-0.instructions."vid.v"]
+mask = 0xfdfff07f
+match = 0x5008a057
+
+[format_12-0.instructions."vle16.v"]
+mask = 0x1df0707f
+match = 0x5007
+
+[format_12-0.instructions."vle16ff.v"]
+mask = 0x1df0707f
+match = 0x1005007
+
+[format_12-0.instructions."vle32.v"]
+mask = 0x1df0707f
+match = 0x6007
+
+[format_12-0.instructions."vle32ff.v"]
+mask = 0x1df0707f
+match = 0x1006007
+
+[format_12-0.instructions."vle64.v"]
+mask = 0x1df0707f
+match = 0x7007
+
+[format_12-0.instructions."vle64ff.v"]
+mask = 0x1df0707f
+match = 0x1007007
+
+[format_12-0.instructions."vle8.v"]
+mask = 0x1df0707f
+match = 0x7
+
+[format_12-0.instructions."vle8ff.v"]
+mask = 0x1df0707f
+match = 0x1000007
+
+[format_13-0.instructions."vloxei16.v"]
+mask = 0x1c00707f
+match = 0xc005007
+
+[format_13-0.instructions."vloxei32.v"]
+mask = 0x1c00707f
+match = 0xc006007
+
+[format_13-0.instructions."vloxei64.v"]
+mask = 0x1c00707f
+match = 0xc007007
+
+[format_13-0.instructions."vloxei8.v"]
+mask = 0x1c00707f
+match = 0xc000007
+
+[format_13-0.instructions."vluxei16.v"]
+mask = 0x1c00707f
+match = 0x4005007
+
+[format_13-0.instructions."vluxei32.v"]
+mask = 0x1c00707f
+match = 0x4006007
+
+[format_13-0.instructions."vluxei64.v"]
+mask = 0x1c00707f
+match = 0x4007007
+
+[format_13-0.instructions."vluxei8.v"]
+mask = 0x1c00707f
+match = 0x4000007
+
+[format_14-0.instructions."vlse16.v"]
+mask = 0x1c00707f
+match = 0x8005007
+
+[format_14-0.instructions."vlse32.v"]
+mask = 0x1c00707f
+match = 0x8006007
+
+[format_14-0.instructions."vlse64.v"]
+mask = 0x1c00707f
+match = 0x8007007
+
+[format_14-0.instructions."vlse8.v"]
+mask = 0x1c00707f
+match = 0x8000007
+
+[format_15-0.instructions."vmv1r.v"]
+mask = 0xfe0ff07f
+match = 0x9e003057
+
+[format_15-0.instructions."vmv2r.v"]
+mask = 0xfe0ff07f
+match = 0x9e00b057
+
+[format_15-0.instructions."vmv4r.v"]
+mask = 0xfe0ff07f
+match = 0x9e01b057
+
+[format_15-0.instructions."vmv8r.v"]
+mask = 0xfe0ff07f
+match = 0x9e03b057
+
+[format_16-0.instructions."vmv.v.i"]
+mask = 0xfff0707f
+match = 0x5e003057
+
+[format_17-0.instructions."vmv.v.v"]
+mask = 0xfff0707f
+match = 0x5e000057
+
+[format_18-0.instructions."vs1r.v"]
+mask = 0xfff0707f
+match = 0x2800027
+
+[format_18-0.instructions."vs2r.v"]
+mask = 0xfff0707f
+match = 0x22800027
+
+[format_18-0.instructions."vs4r.v"]
+mask = 0xfff0707f
+match = 0x62800027
+
+[format_18-0.instructions."vs8r.v"]
+mask = 0xfff0707f
+match = 0xe2800027
+
+[format_18-0.instructions."vsm.v"]
+mask = 0xfff0707f
+match = 0x2b00027
+
+[format_19-0.instructions."vse16.v"]
+mask = 0x1df0707f
+match = 0x5027
+
+[format_19-0.instructions."vse32.v"]
+mask = 0x1df0707f
+match = 0x6027
+
+[format_19-0.instructions."vse64.v"]
+mask = 0x1df0707f
+match = 0x7027
+
+[format_19-0.instructions."vse8.v"]
+mask = 0x1df0707f
+match = 0x27
+
+[format_20-0.instructions.vsetivli]
+mask = 0xc000707f
+match = 0xc0007057
+unsigned = true
+
+[format_21-0.instructions.vsetvl]
+mask = 0xfe00707f
+match = 0x80007057
+
+[format_22-0.instructions.vsetvli]
+mask = 0x8000707f
+match = 0x7057
+
+[format_23-0.instructions."vsoxei16.v"]
+mask = 0x1c00707f
+match = 0xc005027
+
+[format_23-0.instructions."vsoxei32.v"]
+mask = 0x1c00707f
+match = 0xc006027
+
+[format_23-0.instructions."vsoxei64.v"]
+mask = 0x1c00707f
+match = 0xc007027
+
+[format_23-0.instructions."vsoxei8.v"]
+mask = 0x1c00707f
+match = 0xc000027
+
+[format_23-0.instructions."vsuxei16.v"]
+mask = 0x1c00707f
+match = 0x4005027
+
+[format_23-0.instructions."vsuxei32.v"]
+mask = 0x1c00707f
+match = 0x4006027
+
+[format_23-0.instructions."vsuxei64.v"]
+mask = 0x1c00707f
+match = 0x4007027
+
+[format_23-0.instructions."vsuxei8.v"]
+mask = 0x1c00707f
+match = 0x4000027
+
+[format_24-0.instructions."vsse16.v"]
+mask = 0x1c00707f
+match = 0x8005027
+
+[format_24-0.instructions."vsse32.v"]
+mask = 0x1c00707f
+match = 0x8006027
+
+[format_24-0.instructions."vsse64.v"]
+mask = 0x1c00707f
+match = 0x8007027
+
+[format_24-0.instructions."vsse8.v"]
+mask = 0x1c00707f
+match = 0x8000027
