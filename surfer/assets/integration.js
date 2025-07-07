@@ -44,12 +44,20 @@ function register_message_listener() {
         break
       }
 
-      // Handle WCP messages from VS Code extension
+      // Send WCP message through the established WCP channel
       case 'SendWcpMessage': {
-        if (typeof handle_wcp_cs_message === 'function') {
-          handle_wcp_cs_message(decoded.message);
+        console.log('📤 Sending WCP message to Surfer:', decoded.message);
+
+        // Send WCP client message through WASM if available
+        if (window.handle_wcp_cs_message) {
+          try {
+            window.handle_wcp_cs_message(decoded.message);
+            console.log('✅ WCP message sent successfully');
+          } catch (error) {
+            console.error('❌ Failed to send WCP message:', error);
+          }
         } else {
-          console.log('WCP not available or not initialized');
+          console.warn('⚠️ handle_wcp_cs_message not available yet');
         }
         break;
       }
