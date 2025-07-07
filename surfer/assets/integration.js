@@ -44,6 +44,24 @@ function register_message_listener() {
         break
       }
 
+      // Send WCP message through the established WCP channel
+      case 'SendWcpMessage': {
+        console.log('📤 Sending WCP message to Surfer:', decoded.message);
+
+        // Send WCP client message through WASM if available
+        if (window.handle_wcp_cs_message) {
+          try {
+            window.handle_wcp_cs_message(decoded.message);
+            console.log('✅ WCP message sent successfully');
+          } catch (error) {
+            console.error('❌ Failed to send WCP message:', error);
+          }
+        } else {
+          console.warn('⚠️ handle_wcp_cs_message not available yet');
+        }
+        break;
+      }
+
       default:
         console.log(`Unknown message.command ${decoded.command}`)
         break;

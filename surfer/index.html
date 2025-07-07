@@ -6,13 +6,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
 <head>
+    <link data-trunk rel="copy-file" href="assets/integration.js" />
+<link data-trunk rel="copy-file" href="assets/sw.js" />
+<link data-trunk rel="copy-file" href="assets/manifest.json" />
     <!-- change this to your project name -->
     <title>Surfer</title>
 
     <!-- config for our rust wasm binary. go to https://trunkrs.dev/assets/#rust for more customization -->
-    <link data-trunk rel="rust" data-wasm-opt="2" data-typescript />
+        <script type="module">
+        import init from '/surfer.js';
+        await init({module_or_path: '/surfer_bg.wasm'});
+        import {WebHandle, inject_message, id_of_name, draw_text_arrow, start_wcp, next_wcp_sc_message, handle_wcp_cs_message} from '/surfer.js';
+        window.inject_message = inject_message;
+        window.id_of_name = id_of_name;
+        window.draw_text_arrow = draw_text_arrow;
+        window.start_wcp = start_wcp;
+        window.next_wcp_sc_message = next_wcp_sc_message;
+        window.handle_wcp_cs_message = handle_wcp_cs_message;
+        /*SURFER_SETUP_HOOKS*/
+    </script>
+
     <!-- this is the base url relative to which other urls will be constructed. trunk will insert this from the public-url option -->
-    <base data-trunk-public-url />
+    <base href="/" />
 
 
     <script>
@@ -25,9 +40,9 @@
     </script>
 
 
-    <link data-trunk rel="copy-file", href="assets/integration.js" />
-    <link data-trunk rel="copy-file" href="assets/sw.js" />
-    <link data-trunk rel="copy-file" href="assets/manifest.json" />
+
+
+
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
@@ -140,7 +155,7 @@
             white-space: break-spaces;
         }
     </style>
-</head>
+<link rel="modulepreload" href="/surfer.js" crossorigin="anonymous" integrity="sha384-dLvWvAVHnjUW2ZtGlBLNGxsWHLVGCLeNI0k406zpkJHAxzfr8/smprIlksvwrpEQ"><link rel="preload" href="/surfer_bg.wasm" crossorigin="anonymous" integrity="sha384-mgwTATRG1TvTj180CgnRXsS8X49iC7IhXliuhP4l+esGDNyUyUKEPVEZXmSzf3+m" as="fetch" type="application/wasm"></head>
 
 <body>
     <!-- The WASM code will resize the canvas dynamically -->
