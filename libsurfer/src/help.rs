@@ -236,6 +236,7 @@ fn key_listing(ui: &mut Ui) {
             "Go to previous non-zero transition of focused variable",
         ),
         (icons::DELETE_BIN_2_FILL, "x/Delete", "Delete focused item"),
+        ("", "F12", "Open source for focused variable"),
         #[cfg(not(target_arch = "wasm32"))]
         (icons::FULLSCREEN_LINE, "F11", "Toggle full screen"),
     ];

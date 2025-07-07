@@ -3,7 +3,9 @@ use egui::{Context, Event, Key, Modifiers};
 use emath::Vec2;
 
 use crate::config::ArrowKeyBindings;
+use crate::displayed_item::DisplayedItem;
 use crate::message::MessageTarget;
+use crate::wave_container::VariableRefExt;
 use crate::{
     message::Message,
     wave_data::{PER_SCROLL_EVENT, SCROLL_EVENTS_PER_PAGE},
@@ -110,6 +112,19 @@ impl SystemState {
                     }
                     (Key::T, true, false, false) => msgs.push(Message::ToggleToolbar),
                     (Key::F11, true, false, _) => msgs.push(Message::ToggleFullscreen),
+                    (Key::F12, true, false, false) => {
+                        if let Some(waves) = &self.user.waves {
+                            if let Some(focused_vidx) = waves.focused_item {
+                                if let Some(node) = waves.items_tree.get_visible(focused_vidx) {
+                                    if let Some(DisplayedItem::Variable(variable)) = waves.displayed_items.get(&node.item_ref) {
+                                        let signal_name = variable.variable_ref.name.clone();
+                                        let full_path = variable.variable_ref.full_path_string();
+                                        msgs.push(Message::OpenSource { signal_name, full_path });
+                                    }
+                                }
+                            }
+                        }
+                    }
                     (Key::U, true, false, false) => {
                         if modifiers.shift {
                             msgs.push(Message::Redo(self.get_count()));
