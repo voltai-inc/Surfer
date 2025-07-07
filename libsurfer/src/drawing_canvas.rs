@@ -833,7 +833,81 @@ impl SystemState {
             &mut ctx,
             viewport_idx,
         );
-        self.handle_canvas_context_menu(response, waves, to_screen, &mut ctx, msgs, viewport_idx);
+        self.handle_canvas_context_menu(&response, waves, to_screen, &mut ctx, msgs, viewport_idx);
+
+        // Add Ctrl+Click support for canvas context menu
+        let modifiers = egui_ctx.input(|i| i.modifiers);
+        let mut ctrl_click_pos: Option<Pos2> = None;
+        if (modifiers.command || modifiers.ctrl) && response.clicked() {
+            // Store the mouse position when Ctrl+Click happens
+            if let Some(mouse_pos) = ui.input(|i| i.pointer.interact_pos()) {
+                ctrl_click_pos = Some(to_screen.inverse().transform_pos(mouse_pos));
+            }
+            ui.memory_mut(|mem| {
+                let popup_id = egui::Id::new("canvas_ctrl_click_menu");
+                mem.open_popup(popup_id);
+            });
+        }
+
+        // Show popup when opened via Ctrl+Click
+        let popup_id = egui::Id::new("canvas_ctrl_click_menu");
+        egui::popup_below_widget(ui, popup_id, &response, egui::PopupCloseBehavior::CloseOnClickOutside, |ui: &mut egui::Ui| {
+            // Use the stored click position, not the popup position
+            let click_pos = ctrl_click_pos.unwrap_or_else(|| {
+                // Fallback: try to get current mouse position
+                ui.input(|i| i.pointer.interact_pos())
+                    .map(|pos| to_screen.inverse().transform_pos(pos))
+                    .unwrap_or(Pos2::ZERO)
+            });
+
+            // Check if there's a variable under the cursor at the click position
+            if let Some(vidx) = waves.get_item_at_y(click_pos.y) {
+                if let Some(node) = waves.items_tree.get_visible(vidx) {
+                    if let Some(displayed_item) = waves.displayed_items.get(&node.item_ref) {
+                        if let DisplayedItem::Variable(_) = displayed_item {
+                            // Show full item context menu for variables (includes "Open Source")
+                            self.item_context_menu(None, msgs, ui, vidx);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Fallback to marker menu if no variable under cursor
+            let snap_pos = self.snap_to_edge(Some(click_pos), waves, response.rect.size().x, viewport_idx);
+
+            if let Some(time) = snap_pos {
+                self.draw_line(&time, &mut ctx, response.rect.size(), &waves.viewports[viewport_idx], waves);
+                ui.menu_button("Set marker", |ui| {
+                    macro_rules! close_menu {
+                        () => {{
+                            ui.close_menu();
+                        }};
+                    }
+
+                    for id in waves.markers.keys().sorted() {
+                        ui.button(format!("{id}")).clicked().then(|| {
+                            msgs.push(Message::SetMarker {
+                                id: *id,
+                                time: time.clone(),
+                            });
+                            close_menu!();
+                        });
+                    }
+                    // At the moment we only support 255 markers, and the cursor is the 255th
+                    if waves.can_add_marker() {
+                        ui.button("New").clicked().then(|| {
+                            msgs.push(Message::AddMarker {
+                                time,
+                                name: None,
+                                move_focus: true,
+                            });
+                            close_menu!();
+                        });
+                    }
+                });
+            }
+        });
     }
 
     fn draw_wave_data(
@@ -1390,7 +1464,7 @@ impl SystemState {
 
     fn handle_canvas_context_menu(
         &self,
-        response: Response,
+        response: &Response,
         waves: &WaveData,
         to_screen: RectTransform,
         ctx: &mut DrawingContext,

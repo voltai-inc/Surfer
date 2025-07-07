@@ -5,7 +5,7 @@ use ecolor::Color32;
 #[cfg(not(target_arch = "wasm32"))]
 use egui::ViewportCommand;
 use egui::{
-    FontId, FontSelection, Frame, Layout, Painter, RichText, ScrollArea, Sense, TextFormat,
+    FontId, FontSelection, Frame, Id, Layout, Painter, RichText, ScrollArea, Sense, TextFormat,
     TextStyle, UiBuilder, WidgetText,
 };
 use egui_extras::{Column, TableBuilder};
@@ -704,9 +704,41 @@ impl SystemState {
                 ui.close_menu();
             }
         });
-        response
-            .clicked()
-            .then(|| msgs.push(Message::SetActiveScope(ScopeType::WaveScope(scope.clone()))));
+
+        // Add Ctrl+Click support for scope context menu
+        let modifiers = ui.input(|i| i.modifiers);
+        if (modifiers.command || modifiers.ctrl) && response.clicked() {
+            ui.memory_mut(|mem| {
+                let popup_id = egui::Id::new(format!("scope_ctx_menu_{}", scope.to_string()));
+                mem.open_popup(popup_id);
+            });
+        }
+
+        // Show popup when opened
+        let popup_id = egui::Id::new(format!("scope_ctx_menu_{}", scope.to_string()));
+        egui::popup_below_widget(ui, popup_id, &response, egui::PopupCloseBehavior::CloseOnClickOutside, |ui: &mut egui::Ui| {
+            if ui.button("Add scope").clicked() {
+                msgs.push(Message::AddScope(scope.clone(), false));
+                ui.close_menu();
+            }
+            if ui.button("Add scope recursively").clicked() {
+                msgs.push(Message::AddScope(scope.clone(), true));
+                ui.close_menu();
+            }
+            if ui.button("Add scope as group").clicked() {
+                msgs.push(Message::AddScopeAsGroup(scope.clone(), false));
+                ui.close_menu();
+            }
+            if ui.button("Add scope as group recursively").clicked() {
+                msgs.push(Message::AddScopeAsGroup(scope.clone(), true));
+                ui.close_menu();
+            }
+        });
+
+        // Handle normal scope selection clicks (but not Ctrl+Click which is for context menu)
+        if response.clicked() && !modifiers.command && !modifiers.ctrl {
+            msgs.push(Message::SetActiveScope(ScopeType::WaveScope(scope.clone())));
+        }
     }
 
     fn draw_selectable_child_or_orphan_scope(
@@ -1884,29 +1916,43 @@ impl SystemState {
                 WidgetText::LayoutJob(layout_job),
             )
             .interact(Sense::drag());
-        item_label.context_menu(|ui| {
-            self.item_context_menu(field, msgs, ui, vidx);
-        });
 
+        // Add Ctrl+Click support for item context menu
+        let modifiers = ctx.input(|i| i.modifiers);
+        if (modifiers.command || modifiers.ctrl) && item_label.clicked() {
+            // Show popup below the item label for Ctrl+Click
+            let popup_id = Id::new("item_context_popup").with(vidx);
+            egui::popup_below_widget(ui, popup_id, &item_label, egui::PopupCloseBehavior::CloseOnClickOutside, |ui| {
+                self.item_context_menu(field, msgs, ui, vidx);
+            });
+        } else {
+            // Normal context menu on right-click
+            item_label.context_menu(|ui| {
+                self.item_context_menu(field, msgs, ui, vidx);
+            });
+        }
+
+        // Handle item clicks, but ignore Ctrl+Click since it's handled above for context menus
         if item_label.clicked() {
-            let focused = self.user.waves.as_ref().and_then(|w| w.focused_item);
-            let was_focused = focused == Some(vidx);
-            if was_focused {
-                msgs.push(Message::UnfocusItem);
-            } else {
-                let modifiers = ctx.input(|i| i.modifiers);
-                if modifiers.ctrl {
-                    msgs.push(Message::ToggleItemSelected(Some(vidx)));
-                } else if modifiers.shift {
-                    msgs.push(Message::Batch(vec![
-                        Message::ItemSelectionClear,
-                        Message::ItemSelectRange(vidx),
-                    ]));
+            let modifiers = ctx.input(|i| i.modifiers);
+            // Don't handle click if Ctrl/Cmd is pressed (used for context menu)
+            if !modifiers.command && !modifiers.ctrl {
+                let focused = self.user.waves.as_ref().and_then(|w| w.focused_item);
+                let was_focused = focused == Some(vidx);
+                if was_focused {
+                    msgs.push(Message::UnfocusItem);
                 } else {
-                    msgs.push(Message::Batch(vec![
-                        Message::ItemSelectionClear,
-                        Message::FocusItem(vidx),
-                    ]));
+                    if modifiers.shift {
+                        msgs.push(Message::Batch(vec![
+                            Message::ItemSelectionClear,
+                            Message::ItemSelectRange(vidx),
+                        ]));
+                    } else {
+                        msgs.push(Message::Batch(vec![
+                            Message::ItemSelectionClear,
+                            Message::FocusItem(vidx),
+                        ]));
+                    }
                 }
             }
         }

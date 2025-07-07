@@ -24,7 +24,7 @@ pub enum MoveError {
 }
 
 /// N-th visible item, becomes invalid after any add/remove/move/fold/unfold operation
-#[derive(Debug, PartialEq, Eq, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy, Hash, Serialize, Deserialize)]
 pub struct VisibleItemIndex(pub usize);
 
 /// N-th item, may currently be invisible, becomes invalid after any add/remove/move operation

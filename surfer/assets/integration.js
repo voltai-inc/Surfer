@@ -44,6 +44,16 @@ function register_message_listener() {
         break
       }
 
+      // Handle WCP messages from VS Code extension
+      case 'SendWcpMessage': {
+        if (typeof handle_wcp_cs_message === 'function') {
+          handle_wcp_cs_message(decoded.message);
+        } else {
+          console.log('WCP not available or not initialized');
+        }
+        break;
+      }
+
       default:
         console.log(`Unknown message.command ${decoded.command}`)
         break;
