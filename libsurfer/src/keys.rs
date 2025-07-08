@@ -1,4 +1,5 @@
 //! Keyboard handling.
+use egui::debug_text::print;
 use egui::{Context, Event, Key, Modifiers};
 use emath::Vec2;
 
@@ -113,16 +114,25 @@ impl SystemState {
                     (Key::T, true, false, false) => msgs.push(Message::ToggleToolbar),
                     (Key::F11, true, false, _) => msgs.push(Message::ToggleFullscreen),
                     (Key::F12, true, false, false) => {
-                        if let Some(waves) = &self.user.waves {
-                            if let Some(focused_vidx) = waves.focused_item {
-                                if let Some(node) = waves.items_tree.get_visible(focused_vidx) {
-                                    if let Some(DisplayedItem::Variable(variable)) = waves.displayed_items.get(&node.item_ref) {
-                                        let signal_name = variable.variable_ref.name.clone();
-                                        let full_path = variable.variable_ref.full_path_string();
-                                        msgs.push(Message::OpenSource { signal_name, full_path });
-                                    }
-                                }
-                            }
+                        let msg = if let Some(waves) = self.user.waves.as_ref() {
+                            waves
+                                .focused_item
+                                .and_then(|focused_item| waves.items_tree.get_visible(focused_item))
+                                .and_then(|node| waves.displayed_items.get(&node.item_ref))
+                                .and_then(|item| match item {
+                                    DisplayedItem::Variable(v) => Some(v),
+                                    _ => None,
+                                })
+                                .map(|variable| Message::OpenSource {
+                                    signal_name: variable.variable_ref.name.clone(),
+                                    full_path: variable.variable_ref.full_path_string(),
+                                })
+                        } else {
+                            None
+                        };
+
+                        if let Some(msg) = msg {
+                            msgs.push(msg);
                         }
                     }
                     (Key::U, true, false, false) => {

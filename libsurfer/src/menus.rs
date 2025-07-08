@@ -490,6 +490,12 @@ impl SystemState {
         });
 
         if let DisplayedItem::Variable(variable) = displayed_item {
+            // DUMMY BUTTON FOR DEBUGGING - This should always show
+            if ui.button("🔍 DEBUG - Test Button").clicked() {
+                println!("DEBUG: Test button clicked for variable: {}", variable.variable_ref.name);
+                println!("DEBUG: WCP greeted: {}", self.wcp_greeted_signal.load(Ordering::Relaxed));
+                ui.close_menu();
+            }
 
             ui.menu_button("Name", |ui| {
                 let variable_name_type = variable.display_name_type;
