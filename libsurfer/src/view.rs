@@ -2184,31 +2184,37 @@ impl SystemState {
         }
     }
 
-    pub fn get_variable_name_info(
-        &self,
-        wave_container: &WaveContainer,
-        var: &VariableRef,
-    ) -> Option<VariableNameInfo> {
+pub fn get_variable_name_info(
+    &self,
+    wave_container: &WaveContainer,
+    var: &VariableRef,
+) -> Option<VariableNameInfo> {
+    // First, attempt a safe, read-only check of the cache.
+    if let Some(info) = self.variable_name_info_cache.borrow().get(var) {
+        return info.clone(); // If the name is already cached, return it.
+    }
+
+    // If not in the cache, try for a mutable lock to insert the new name.
+    if let Ok(mut cache) = self.variable_name_info_cache.try_borrow_mut() {
         let meta = wave_container.variable_meta(var).ok();
 
-        let info = self
-            .variable_name_info_cache
-            .borrow_mut()
-            .entry(var.clone())
-            .or_insert_with(|| {
-                meta.as_ref().and_then(|meta| {
-                    let info = self
-                        .translators
-                        .all_translators()
-                        .iter()
-                        .find_map(|t| t.variable_name_info(meta));
-                    info
-                })
+        let entry = cache.entry(var.clone()).or_insert_with(|| {
+            meta.as_ref().and_then(|meta| {
+                self.translators
+                    .all_translators()
+                    .iter()
+                    .find_map(|t| t.variable_name_info(meta))
             })
-            .clone();
+        });
 
-        info
+        // FIX: Return the cloned entry directly. It is already an Option<VariableNameInfo>.
+        entry.clone()
+    } else {
+        // If getting a mutable lock fails (due to a nested call),
+        // gracefully return `None` instead of crashing.
+        None
     }
+}
 
     pub fn draw_background(
         &self,
