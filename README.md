@@ -3,7 +3,7 @@
 
 Voltai's Fork of surfer - to enable greater integration with vscode.
 
-[open source when we deploy as a commercial product, as per eupl license]
+[open source if we deploy as a commercial product, as per eupl license]
 
 ![Pipeline status](https://gitlab.com/surfer-project/surfer/badges/main/pipeline.svg)
 ![License](https://img.shields.io/gitlab/license/surfer-project%2Fsurfer)
