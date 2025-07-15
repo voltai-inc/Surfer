@@ -2184,38 +2184,38 @@ impl SystemState {
         }
     }
 
+// THE CORRECTED RUST FUNCTION
 pub fn get_variable_name_info(
     &self,
     wave_container: &WaveContainer,
     var: &VariableRef,
 ) -> Option<VariableNameInfo> {
-    // First, attempt a safe, read-only check of the cache.
+    // 1. Check the cache with a read-only borrow.
     if let Some(info) = self.variable_name_info_cache.borrow().get(var) {
-        return info.clone(); // If the name is already cached, return it.
+        return info.clone();
     }
 
-    // If not in the cache, try for a mutable lock to insert the new name.
-    if let Ok(mut cache) = self.variable_name_info_cache.try_borrow_mut() {
-        let meta = wave_container.variable_meta(var).ok();
 
-        let entry = cache.entry(var.clone()).or_insert_with(|| {
-            meta.as_ref().and_then(|meta| {
-                self.translators
-                    .all_translators()
-                    .iter()
-                    .find_map(|t| t.variable_name_info(meta))
-            })
-        });
+    // 2. Do the dangerous, complex work FIRST, while we hold NO locks.
+    let meta = wave_container.variable_meta(var).ok();
+    let new_info = meta.as_ref().and_then(|meta| {
+        self.translators
+            .all_translators()
+            .iter()
+            .find_map(|t| t.variable_name_info(meta))
+    });
 
-        // FIX: Return the cloned entry directly. It is already an Option<VariableNameInfo>.
-        entry.clone()
+    // 3. NOW, lock the cache just for the quick insert operation.
+    if let Ok(mut cache) = self.variable_name_info_cache.try_borrow_mut() { // 🔒 Lock acquired!
+        // 4. Insert the value we already computed. This is a very fast operation.
+        let entry = cache.entry(var.clone()).or_insert_with(|| new_info);
+        return entry.clone();
+        // The lock is automatically released here at the end of the `if` block. 🔒
     } else {
-        // If getting a mutable lock fails (due to a nested call),
-        // gracefully return `None` instead of crashing.
-        None
+        // Fallback in case of a race condition from another thread, not a nested call.
+        return new_info;
     }
 }
-
     pub fn draw_background(
         &self,
         drawing_info: &ItemDrawingInfo,
